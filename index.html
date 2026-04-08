@@ -5,91 +5,306 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zixian Lei | Personal Page</title>
   <style>
+    :root {
+      --text: #111111;
+      --muted: #666666;
+      --line: #e9e9e9;
+      --bg: #ffffff;
+      --soft: #f7f7f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      color: #111;
-      background: #fff;
-      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
     }
+
     .container {
-      max-width: 800px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 56px 24px 80px;
+      padding: 64px 24px 96px;
     }
+
+    .hero {
+      margin-bottom: 40px;
+    }
+
     h1 {
-      font-size: 40px;
+      font-size: 42px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .bio {
+      font-size: 17px;
+      max-width: 760px;
+      margin: 0;
+    }
+
+    section {
+      margin-top: 40px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 0 0 18px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    a {
+      color: var(--text);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      padding: 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .pub-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pub-list li {
+      margin-bottom: 22px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pub-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .pub-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+
+    .pub-authors {
+      color: var(--text);
+      font-size: 15px;
+    }
+
+    .pub-venue {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 3px;
+    }
+
+    .pub-links {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .pub-links a,
+    .pub-links span {
+      display: inline-block;
+      margin-right: 12px;
+    }
+
+    .pub-links span {
+      color: var(--muted);
+    }
+
+    .links a {
+      display: inline-block;
+      margin-right: 16px;
       margin-bottom: 8px;
     }
-    .subtitle {
-      color: #666;
-      font-size: 18px;
-      margin-bottom: 28px;
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 12px;
     }
-    h2 {
-      margin-top: 32px;
-      font-size: 20px;
-      border-top: 1px solid #eee;
-      padding-top: 20px;
+
+    .contact {
+      color: var(--text);
     }
-    a {
-      color: #111;
+
+    .footer {
+      margin-top: 48px;
+      color: var(--muted);
+      font-size: 14px;
     }
-    ul {
-      padding-left: 20px;
-    }
-    .links a {
-      margin-right: 14px;
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 44px 20px 72px;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .bio {
+        font-size: 16px;
+      }
+
+      .pub-title {
+        font-size: 17px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Zixian Lei 雷子闲</h1>
-    <div class="subtitle">
-      Research Assistant / Incoming PhD Student (Intelligent Manufacturing and Robotics, IMR SUSTech)  
-      Future Spaces Vision Lab<br>
-      School of Design, Southern University of Science and Technology
-    </div>
+  <main class="container">
+    <header class="hero">
+      <h1>Zixian Lei 雷子闲</h1>
+      <div class="subtitle">
+        Research Assistant / Incoming PhD Student (Intelligent Manufacturing and Robotics, IMR)<br>
+        Future Spaces Vision Lab<br>
+        School of Design, Southern University of Science and Technology (SUSTech)
+      </div>
+      <p class="bio">
+        I am interested in ergonomics, user experience, and human-computer interaction.
+        My work focuses on controlled laboratory experiments, physiological sensing,
+        and statistical analysis of behavioral and physiological data.
+      </p>
+    </header>
 
-    <p>
-      I am interested in Ergonomics, User Experience, and Human-Computer Interaction. 
-      I am skilled in conducting strictly controlled laboratory experiments using physiological instruments, as well as performing statistical analysis on the data.
+    <section>
+      <h2>Research Interests</h2>
+      <ul class="tag-list">
+        <li>Ergonomics</li>
+        <li>Human-Computer Interaction</li>
+        <li>XR / User Experience</li>
+        <li>Applied Psychology</li>
+        <li>Industrial Design</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Publications</h2>
+      <ul class="pub-list">
+        <li>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1145/3772318.3791177">
+              “Please Share”: Promoting Embodied Forms of Interpersonal Stress Sharing Through Real-Time Neurofeedback
+            </a>
+          </div>
+          <div class="pub-authors">
+            Zordan, M.*, Liu, M., Lei, Z.
+          </div>
+          <div class="pub-venue">
+            Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), 2026
+          </div>
+          <div class="pub-links">
+            <a href="https://doi.org/10.1145/3772318.3791177">DOI</a>
+          </div>
+        </li>
+
+        <li>
+          <div class="pub-title">
+            The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
+          </div>
+          <div class="pub-authors">
+            Hou, Z., Lei, Z., Wang, H.
+          </div>
+          <div class="pub-venue">
+            Transportation Research Part F: Traffic Psychology and Behaviour, 2024
+          </div>
+          <div class="pub-links">
+            <span>DOI to be added</span>
+          </div>
+        </li>
+
+        <li>
+          <div class="pub-title">
+            Nonverbal communication between cars: Influence of taillight expressions on message delivery effectiveness
+          </div>
+          <div class="pub-authors">
+            Hou, G., Lei, Z.
+          </div>
+          <div class="pub-venue">
+            International Journal of Industrial Ergonomics, 2025
+          </div>
+          <div class="pub-links">
+            <span>DOI to be added</span>
+          </div>
+        </li>
+      </ul>
+      <div class="note">
+        * Author notation can be updated later if you want to indicate equal contribution or corresponding authorship.
+      </div>
+    </section>
+
+    <!--
+    <section>
+      <h2>Selected Work</h2>
+      <p>This section is intentionally hidden for now.</p>
+    </section>
+    -->
+
+    <section>
+      <h2>Links</h2>
+      <p class="links">
+        <a href="mailto:lzxlook@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en">Google Scholar</a>
+        <a href="https://orcid.org/0009-0003-8208-3291">ORCID</a>
+      </p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p class="contact">
+        Shenzhen, China<br>
+        Email: <a href="mailto:lzxlook@gmail.com">lzxlook@gmail.com</a>
+      </p>
+    </section>
+
+    <p class="footer">
+      Last updated: 2026
     </p>
-
-    <h2>Research Interests</h2>
-    <ul>
-      <li>Ergonomics</li>
-      <li>Human-Computer Interaction (HCI)</li>
-      <li>XR / User Experience</li>
-      <li>Applied Psychology</li>
-      <li>Industrial Design</li>
-    </ul>
-
-    <h2>Selected Work</h2>
-    <ul>
-      <li><strong>Project / Paper Title 1</strong> — one-sentence description.</li>
-      <li><strong>Project / Paper Title 2</strong> — one-sentence description.</li>
-      <li><strong>Project / Paper Title 3</strong> — one-sentence description.</li>
-    </ul>
-
-    <h2>Links</h2>
-    <p class="links">
-      <a href="mailto:lzxlook@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/">LinkedIn</a>
-      <a href="#">"https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en"</a>
-      <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en">Google Scholar</a>
-      <a href="https://orcid.org/0009-0003-8208-3291">ORCID</a>
-     
-    </p>
-
-    <h2>Contact</h2>
-    <p>
-     3F, Bldg. C1, Nanshan iPark
-No.1001 XueYuan Avenue
-Nanshan,  Shenzhen, China<br>
-      Email: <a href="mailto:lzxlook@gmail.com">lzxlook@gmail.com</a>
-    </p>
-  </div>
+  </main>
 </body>
 </html>
