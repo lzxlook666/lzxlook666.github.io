@@ -6,11 +6,21 @@
   <title>Zixian Lei | Personal Page</title>
   <style>
     :root {
+      --bg: #ffffff;
       --text: #111111;
       --muted: #666666;
       --line: #e9e9e9;
-      --bg: #ffffff;
-      --soft: #f7f7f7;
+      --accent: #e85adf;
+      --soft: #fafafa;
+    }
+
+    body.dark {
+      --bg: #111111;
+      --text: #f3f3f3;
+      --muted: #b8b8b8;
+      --line: #2a2a2a;
+      --accent: #ff7cf2;
+      --soft: #171717;
     }
 
     * {
@@ -24,114 +34,185 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
       background: var(--bg);
-      line-height: 1.7;
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .container {
-      max-width: 920px;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
+    }
+
+    .page {
+      max-width: 980px;
       margin: 0 auto;
-      padding: 64px 24px 96px;
+      padding: 24px 24px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      margin-bottom: 44px;
+      color: var(--muted);
+    }
+
+    .topbar a.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .theme-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 17px;
+      color: var(--text);
+      padding: 0;
     }
 
     .hero {
-      display: flex;
-      align-items: flex-start;
-      gap: 28px;
-      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+      margin-bottom: 48px;
     }
 
-    .profile {
-      width: 170px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      flex-shrink: 0;
-    }
-
-    .hero-text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    h1 {
-      font-size: 42px;
-      line-height: 1.15;
+    .name {
+      font-size: 46px;
+      line-height: 1.1;
       margin: 0 0 10px;
       letter-spacing: -0.02em;
     }
 
+    .name strong {
+      font-weight: 700;
+    }
+
+    .name span {
+      font-weight: 300;
+    }
+
     .subtitle {
-      color: var(--muted);
       font-size: 18px;
+      color: var(--muted);
       margin-bottom: 20px;
     }
 
-    .bio {
-      font-size: 17px;
-      margin: 0;
-      max-width: 720px;
+    .subtitle .accent {
+      color: var(--accent);
     }
 
-    section {
-      margin-top: 40px;
-      padding-top: 22px;
-      border-top: 1px solid var(--line);
-    }
-
-    h2 {
-      font-size: 18px;
+    .bio p {
       margin: 0 0 18px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
+      font-size: 16px;
     }
 
-    a {
-      color: var(--text);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 2px;
-    }
-
-    a:hover {
-      opacity: 0.72;
-    }
-
-    .tag-list {
+    .socials {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      align-items: center;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 20px;
     }
 
-    .tag-list li {
-      padding: 7px 12px;
+    .small-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .photo-wrap {
+      text-align: left;
+    }
+
+    .profile {
+      width: 100%;
+      max-width: 270px;
+      aspect-ratio: 1 / 1.05;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
       border: 1px solid var(--line);
-      border-radius: 999px;
       background: var(--soft);
+    }
+
+    .photo-contact {
+      margin-top: 12px;
       font-size: 14px;
-      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0 0 20px;
+      letter-spacing: 0.01em;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 12px;
+      max-width: 760px;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      font-size: 15px;
+    }
+
+    .news-date {
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .news-text {
+      color: var(--muted);
     }
 
     .pub-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+      display: grid;
+      gap: 28px;
     }
 
-    .pub-list li {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--line);
+    .pub-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 18px;
+      align-items: start;
     }
 
-    .pub-list li:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
+    .pub-thumb {
+      width: 90px;
+      height: 68px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--soft), #f0f0f0);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    body.dark .pub-thumb {
+      background: linear-gradient(135deg, #1b1b1b, #222222);
     }
 
     .pub-title {
@@ -143,210 +224,265 @@
 
     .pub-authors {
       font-size: 15px;
+      color: var(--text);
+      margin-bottom: 4px;
     }
 
     .pub-venue {
-      color: var(--muted);
       font-size: 15px;
-      margin-top: 3px;
-    }
-
-    .pub-links {
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    .pub-links a {
-      display: inline-block;
-      margin-right: 14px;
-    }
-
-    .links a {
-      display: inline-block;
-      margin-right: 16px;
+      color: var(--muted);
+      font-style: italic;
       margin-bottom: 8px;
     }
 
-    .note {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 12px;
+    .pub-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
     }
 
-    .contact {
+    .pub-actions a {
+      display: inline-block;
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      font-size: 12px;
       color: var(--text);
+      background: var(--bg);
+    }
+
+    .pub-actions a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .links-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--muted);
     }
 
     .footer {
-      margin-top: 48px;
+      margin-top: 54px;
+      font-size: 13px;
       color: var(--muted);
-      font-size: 14px;
     }
 
-    @media (max-width: 700px) {
-      .container {
-        padding: 44px 20px 72px;
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
       }
 
-      .hero {
-        flex-direction: column;
-        gap: 20px;
+      .photo-wrap {
+        order: -1;
       }
 
       .profile {
-        width: 130px;
-        height: 130px;
+        max-width: 220px;
       }
 
-      h1 {
-        font-size: 34px;
+      .pub-item {
+        grid-template-columns: 1fr;
       }
 
-      .subtitle {
-        font-size: 16px;
+      .pub-thumb {
+        width: 100px;
+        height: 72px;
       }
 
-      .bio {
-        font-size: 16px;
-      }
-
-      .pub-title {
-        font-size: 17px;
+      .news-item {
+        grid-template-columns: 1fr;
+        gap: 4px;
       }
     }
   </style>
 </head>
 <body>
-  <main class="container">
-    <header class="hero">
-      <img
-        class="profile"
-        src="微信图片_20260408145935_104_45.jpg"
-        alt="Portrait of Zixian Lei"
-      />
+  <main class="page">
+    <nav class="topbar">
+      <a class="active" href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#links">Links</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">◐</button>
+    </nav>
 
-      <div class="hero-text">
-        <h1>Zixian Lei 雷子闲</h1>
+    <section class="hero" id="about">
+      <div>
+        <h1 class="name"><strong>Zixian</strong> <span>Lei 雷子闲</span></h1>
 
         <div class="subtitle">
-          Research Assistant / Incoming PhD Student (Intelligent Manufacturing and Robotics, IMR)<br>
-          Future Spaces Vision Lab<br>
-          School of Design, Southern University of Science and Technology (SUSTech)
+          Research Assistant | <span class="accent">Incoming PhD Student</span><br>
+          Future Spaces Vision Lab, School of Design, SUSTech
         </div>
 
-        <p class="bio">
-          I am interested in ergonomics, user experience, and human-computer interaction.
-          My work focuses on controlled laboratory experiments, physiological sensing,
-          and statistical analysis of behavioral and physiological data.
-        </p>
+        <div class="bio">
+          <p>
+            I am interested in ergonomics, human-computer interaction, user experience,
+            and XR-related interaction design.
+          </p>
+
+          <p>
+            My work focuses on strictly controlled laboratory experiments using physiological
+            instruments, as well as statistical analysis of behavioral and physiological data.
+          </p>
+
+          <p>
+            I am currently affiliated with the Future Spaces Vision Lab at the School of Design,
+            Southern University of Science and Technology.
+          </p>
+        </div>
+
+        <div class="socials">
+          <a href="mailto:lzxlook@gmail.com" title="Email">✉</a>
+          <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/" title="LinkedIn">in</a>
+          <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en" title="Google Scholar">GS</a>
+          <a href="https://orcid.org/0009-0003-8208-3291" title="ORCID">ID</a>
+        </div>
+
+        <div class="small-note">
+          Email available above. Full CV available upon request.
+        </div>
       </div>
-    </header>
 
-    <section>
-      <h2>Research Interests</h2>
-      <ul class="tag-list">
-        <li>Ergonomics</li>
-        <li>Human-Computer Interaction</li>
-        <li>XR / User Experience</li>
-        <li>Applied Psychology</li>
-        <li>Industrial Design</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Publications</h2>
-      <ul class="pub-list">
-        <li>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1145/3772318.3791177">
-              “Please Share”: Promoting Embodied Forms of Interpersonal Stress Sharing Through Real-Time Neurofeedback
-            </a>
-          </div>
-          <div class="pub-authors">
-            Zordan, M.*, Liu, M., Lei, Z.
-          </div>
-          <div class="pub-venue">
-            Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), 2026
-          </div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1145/3772318.3791177">DOI</a>
-          </div>
-        </li>
-
-        <li>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.ergon.2025.103847">
-              Nonverbal communication between cars: Influence of taillight expressions on message delivery effectiveness
-            </a>
-          </div>
-          <div class="pub-authors">
-            Hou, G., Lei, Z.
-          </div>
-          <div class="pub-venue">
-            International Journal of Industrial Ergonomics, 2025
-          </div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1016/j.ergon.2025.103847">DOI</a>
-            <a href="Nonverbal communication between cars.pdf">PDF</a>
-          </div>
-        </li>
-      </ul>
-
-      
-        <li>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.trf.2024.07.002">
-              The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
-            </a>
-          </div>
-          <div class="pub-authors">
-            Hou, Z., Lei, Z., Wang, H.
-          </div>
-          <div class="pub-venue">
-            Transportation Research Part F: Traffic Psychology and Behaviour, 2024
-          </div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.1016/j.trf.2024.07.002">DOI</a>
-            <a href="The effect of taillight shapes and vehicle distance on rearward.pdf">PDF</a>
-          </div>
-        </li>
-
-
-      <div class="note">
-        * Author notation can be updated later if you want to indicate equal contribution or corresponding authorship.
+      <div class="photo-wrap">
+        <img
+          class="profile"
+          src="微信图片_20260408145935_104_45.jpg"
+          alt="Portrait of Zixian Lei"
+        />
+        <div class="photo-contact">
+          email: <a href="mailto:lzxlook@gmail.com">lzxlook@gmail.com</a>
+        </div>
       </div>
     </section>
 
-    <!--
-    <section>
-      <h2>Selected Work</h2>
-      <p>This section is intentionally hidden for now.</p>
-    </section>
-    -->
+    <section class="section" id="news">
+      <h2 class="section-title">News</h2>
+      <div class="news-list">
+        <div class="news-item">
+          <div class="news-date">Apr 2026</div>
+          <div class="news-text">
+            My personal academic website is now live.
+          </div>
+        </div>
 
-    <section>
-      <h2>Links</h2>
-      <p class="links">
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-text">
+            Our paper “Please Share” was accepted to CHI 2026.
+          </div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-text">
+            Published work on taillight expressions and message delivery effectiveness in
+            <em>International Journal of Industrial Ergonomics</em>.
+          </div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">2024</div>
+          <div class="news-text">
+            Published work on taillight shapes, vehicle distance, and rearward drivers’
+            hazard perception in <em>Transportation Research Part F</em>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <h2 class="section-title">Selected Publications</h2>
+
+      <div class="pub-list">
+        <article class="pub-item">
+          <div class="pub-thumb">CHI</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1145/3772318.3791177">
+                “Please Share”: Promoting Embodied Forms of Interpersonal Stress Sharing Through Real-Time Neurofeedback
+              </a>
+            </div>
+            <div class="pub-authors">
+              Zordan, M.*, Liu, M., Lei, Z.
+            </div>
+            <div class="pub-venue">
+              Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), 2026
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1145/3772318.3791177">DOI</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">TRF</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002">
+                The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
+              </a>
+            </div>
+            <div class="pub-authors">
+              Hou, Z., Lei, Z., Wang, H.
+            </div>
+            <div class="pub-venue">
+              Transportation Research Part F: Traffic Psychology and Behaviour, 2024
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002">DOI</a>
+              <a href="The effect of taillight shapes and vehicle distance on rearward.pdf">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">IJIE</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1016/j.ergon.2025.103847">
+                Nonverbal communication between cars: Influence of taillight expressions on message delivery effectiveness
+              </a>
+            </div>
+            <div class="pub-authors">
+              Hou, G., Lei, Z.
+            </div>
+            <div class="pub-venue">
+              International Journal of Industrial Ergonomics, 2025
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.ergon.2025.103847">DOI</a>
+              <a href="Nonverbal communication between cars.pdf">PDF</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="links">
+      <h2 class="section-title">Links</h2>
+      <div class="links-line">
         <a href="mailto:lzxlook@gmail.com">Email</a>
         <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/">LinkedIn</a>
         <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en">Google Scholar</a>
         <a href="https://orcid.org/0009-0003-8208-3291">ORCID</a>
-      </p>
+      </div>
     </section>
 
-    <section>
-      <h2>Contact</h2>
-      <p class="contact">
-        3F, Bldg. C1, Nanshan iPark
-No.1001 XueYuan Avenue
-Nanshan, Shenzhen, China<br>
-        Email: <a href="mailto:lzxlook@gmail.com">lzxlook@gmail.com</a>
-      </p>
-    </section>
-
-    <p class="footer">
+    <div class="footer">
       Last updated: 2026
-    </p>
+    </div>
   </main>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
 </body>
 </html>
