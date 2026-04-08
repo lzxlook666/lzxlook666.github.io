@@ -10,7 +10,7 @@
       --text: #111111;
       --muted: #666666;
       --line: #e9e9e9;
-      --accent: #e85adf;
+      --accent: #4F80FF;
       --soft: #fafafa;
     }
 
@@ -19,7 +19,7 @@
       --text: #f3f3f3;
       --muted: #b8b8b8;
       --line: #2a2a2a;
-      --accent: #ff7cf2;
+      --accent: #4F80FF;
       --soft: #171717;
     }
 
@@ -106,10 +106,6 @@
       font-size: 18px;
       color: var(--muted);
       margin-bottom: 20px;
-    }
-
-    .subtitle .accent {
-      color: var(--accent);
     }
 
     .bio p {
@@ -304,7 +300,6 @@
   <main class="page">
     <nav class="topbar">
       <a class="active" href="#about">About</a>
-      <a href="#news">News</a>
       <a href="#publications">Publications</a>
       <a href="#links">Links</a>
       <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">◐</button>
@@ -315,7 +310,7 @@
         <h1 class="name"><strong>Zixian</strong> <span>Lei 雷子闲</span></h1>
 
         <div class="subtitle">
-          Research Assistant | <span class="accent">Incoming PhD Student</span><br>
+          Research Assistant | Incoming PhD Student<br>
           Future Spaces Vision Lab, School of Design, SUSTech
         </div>
 
@@ -360,6 +355,7 @@
       </div>
     </section>
 
+    <!--
     <section class="section" id="news">
       <h2 class="section-title">News</h2>
       <div class="news-list">
@@ -394,11 +390,10 @@
         </div>
       </div>
     </section>
+    -->
 
-    <section class="section" id="publications">
-      <h2 class="section-title">Selected Publications</h2>
+   
 
-      <div class="pub-list">
         <article class="pub-item">
           <div class="pub-thumb">CHI</div>
           <div>
@@ -418,27 +413,10 @@
             </div>
           </div>
         </article>
+      </div>
+    </section>
 
-        <article class="pub-item">
-          <div class="pub-thumb">TRF</div>
-          <div>
-            <div class="pub-title">
-              <a href="https://doi.org/10.1016/j.trf.2024.07.002">
-                The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
-              </a>
-            </div>
-            <div class="pub-authors">
-              Hou, Z., Lei, Z., Wang, H.
-            </div>
-            <div class="pub-venue">
-              Transportation Research Part F: Traffic Psychology and Behaviour, 2024
-            </div>
-            <div class="pub-actions">
-              <a href="https://doi.org/10.1016/j.trf.2024.07.002">DOI</a>
-              <a href="The effect of taillight shapes and vehicle distance on rearward.pdf">PDF</a>
-            </div>
-          </div>
-        </article>
+    
 
         <article class="pub-item">
           <div class="pub-thumb">IJIE</div>
@@ -460,8 +438,31 @@
             </div>
           </div>
         </article>
-      </div>
-    </section>
+
+     <section class="section" id="publications">
+      <h2 class="section-title">Selected Publications</h2>
+
+      <div class="pub-list">
+        <article class="pub-item">
+          <div class="pub-thumb">TRF</div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002">
+                The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
+              </a>
+            </div>
+            <div class="pub-authors">
+              Hou, Z., Lei, Z., Wang, H.
+            </div>
+            <div class="pub-venue">
+              Transportation Research Part F: Traffic Psychology and Behaviour, 2024
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002">DOI</a>
+              <a href="The effect of taillight shapes and vehicle distance on rearward.pdf">PDF</a>
+            </div>
+          </div>
+        </article>
 
     <section class="section" id="links">
       <h2 class="section-title">Links</h2>
