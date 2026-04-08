@@ -30,13 +30,30 @@
     }
 
     .container {
-      max-width: 860px;
+      max-width: 920px;
       margin: 0 auto;
       padding: 64px 24px 96px;
     }
 
     .hero {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
       margin-bottom: 40px;
+    }
+
+    .profile {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 0;
     }
 
     h1 {
@@ -49,13 +66,13 @@
     .subtitle {
       color: var(--muted);
       font-size: 18px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .bio {
       font-size: 17px;
-      max-width: 760px;
       margin: 0;
+      max-width: 720px;
     }
 
     section {
@@ -78,7 +95,7 @@
     }
 
     a:hover {
-      opacity: 0.7;
+      opacity: 0.72;
     }
 
     .tag-list {
@@ -106,7 +123,7 @@
     }
 
     .pub-list li {
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       padding-bottom: 20px;
       border-bottom: 1px solid var(--line);
     }
@@ -125,7 +142,6 @@
     }
 
     .pub-authors {
-      color: var(--text);
       font-size: 15px;
     }
 
@@ -140,14 +156,9 @@
       font-size: 14px;
     }
 
-    .pub-links a,
-    .pub-links span {
+    .pub-links a {
       display: inline-block;
-      margin-right: 12px;
-    }
-
-    .pub-links span {
-      color: var(--muted);
+      margin-right: 14px;
     }
 
     .links a {
@@ -172,9 +183,19 @@
       font-size: 14px;
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       .container {
         padding: 44px 20px 72px;
+      }
+
+      .hero {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .profile {
+        width: 130px;
+        height: 130px;
       }
 
       h1 {
@@ -198,17 +219,27 @@
 <body>
   <main class="container">
     <header class="hero">
-      <h1>Zixian Lei 雷子闲</h1>
-      <div class="subtitle">
-        Research Assistant / Incoming PhD Student (Intelligent Manufacturing and Robotics, IMR)<br>
-        Future Spaces Vision Lab<br>
-        School of Design, Southern University of Science and Technology (SUSTech)
+      <img
+        class="profile"
+        src="微信图片_20260408145935_104_45.jpg"
+        alt="Portrait of Zixian Lei"
+      />
+
+      <div class="hero-text">
+        <h1>Zixian Lei 雷子闲</h1>
+
+        <div class="subtitle">
+          Research Assistant / Incoming PhD Student (Intelligent Manufacturing and Robotics, IMR)<br>
+          Future Spaces Vision Lab<br>
+          School of Design, Southern University of Science and Technology (SUSTech)
+        </div>
+
+        <p class="bio">
+          I am interested in ergonomics, user experience, and human-computer interaction.
+          My work focuses on controlled laboratory experiments, physiological sensing,
+          and statistical analysis of behavioral and physiological data.
+        </p>
       </div>
-      <p class="bio">
-        I am interested in ergonomics, user experience, and human-computer interaction.
-        My work focuses on controlled laboratory experiments, physiological sensing,
-        and statistical analysis of behavioral and physiological data.
-      </p>
     </header>
 
     <section>
@@ -244,7 +275,9 @@
 
         <li>
           <div class="pub-title">
-            The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
+            <a href="https://doi.org/10.1016/j.trf.2024.07.002">
+              The effect of taillight shapes and vehicle distance on rearward drivers’ hazard perception
+            </a>
           </div>
           <div class="pub-authors">
             Hou, Z., Lei, Z., Wang, H.
@@ -253,13 +286,16 @@
             Transportation Research Part F: Traffic Psychology and Behaviour, 2024
           </div>
           <div class="pub-links">
-            <span>DOI to be added</span>
+            <a href="https://doi.org/10.1016/j.trf.2024.07.002">DOI</a>
+            <a href="The effect of taillight shapes and vehicle distance on rearward.pdf">PDF</a>
           </div>
         </li>
 
         <li>
           <div class="pub-title">
-            Nonverbal communication between cars: Influence of taillight expressions on message delivery effectiveness
+            <a href="https://doi.org/10.1016/j.ergon.2025.103847">
+              Nonverbal communication between cars: Influence of taillight expressions on message delivery effectiveness
+            </a>
           </div>
           <div class="pub-authors">
             Hou, G., Lei, Z.
@@ -268,10 +304,12 @@
             International Journal of Industrial Ergonomics, 2025
           </div>
           <div class="pub-links">
-            <span>DOI to be added</span>
+            <a href="https://doi.org/10.1016/j.ergon.2025.103847">DOI</a>
+            <a href="Nonverbal communication between cars.pdf">PDF</a>
           </div>
         </li>
       </ul>
+
       <div class="note">
         * Author notation can be updated later if you want to indicate equal contribution or corresponding authorship.
       </div>
