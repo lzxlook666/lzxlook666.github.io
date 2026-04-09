@@ -90,14 +90,8 @@
     .name {
       font-size: 46px;
       line-height: 1.1;
-      margin: 0 0 10px;
+      margin: 0 0 14px;
       letter-spacing: -0.02em;
-    }
-
-    .bio strong {
-      color: #4F80FF;
-      font-weight: 700;
-      font-style: italic;
     }
 
     .name strong {
@@ -109,9 +103,26 @@
     }
 
     .subtitle {
+      max-width: 640px;
       font-size: 18px;
       color: var(--muted);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      line-height: 1.75;
+    }
+
+    .subtitle .lab-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .subtitle .lab-link:hover {
+      text-decoration: underline;
+    }
+
+    .bio strong {
+      color: var(--accent);
+      font-weight: 700;
+      font-style: italic;
     }
 
     .bio p {
@@ -140,8 +151,8 @@
     .profile {
       width: 100%;
       max-width: 270px;
-      aspect-ratio: 1 / 1.05;
-      object-fit: cover;
+      height: auto;
+      object-fit: contain;
       display: block;
       border-radius: 2px;
       border: 1px solid var(--line);
@@ -294,12 +305,18 @@
         <h1 class="name"><strong>Zixian Lei</strong> <span>雷子闲</span></h1>
 
         <div class="subtitle">
-  Incoming PhD Student in Intelligent Manufacturing and Robotics (IMR)<br>
-  <a href="https://www.fsv-lab.com" target="_blank" rel="noopener noreferrer">
-    Future Spaces Vision (FSV) Lab
-  </a>, School of Design, SUSTech<br>
-  Supervised by Prof. Mirna Zordan
-</div>
+          Incoming PhD Student in Intelligent Manufacturing and Robotics (IMR) at the
+          <a
+            class="lab-link"
+            href="https://www.fsv-lab.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Future Spaces Vision (FSV) Lab
+          </a>,
+          School of Design, Southern University of Science and Technology (SUSTech),
+          under the supervision of Prof. Mirna Zordan.
+        </div>
 
         <div class="bio">
           <p>
