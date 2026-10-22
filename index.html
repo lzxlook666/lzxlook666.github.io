@@ -173,15 +173,25 @@
       letter-spacing: 0.01em;
     }
 
-    /* NEWS module */
+    /* NEWS */
     .news-list {
       display: grid;
-      gap: 18px;
+      gap: 22px;
     }
 
     .news-item {
-      border-left: 3px solid var(--accent);
-      padding-left: 16px;
+      display: grid;
+      grid-template-columns: 95px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .news-date {
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.7;
+      white-space: nowrap;
     }
 
     .news-en {
@@ -195,6 +205,11 @@
       color: var(--muted);
       line-height: 1.7;
       margin: 8px 0 0;
+    }
+
+    .news-en strong,
+    .news-cn strong {
+      font-weight: 700;
     }
 
     .pub-list {
@@ -301,6 +316,11 @@
         max-width: 220px;
       }
 
+      .news-item {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 12px;
+      }
+
       .pub-item {
         grid-template-columns: 1fr;
       }
@@ -389,15 +409,20 @@
 
       <div class="news-list">
         <article class="news-item">
-          <p class="news-en">
-            Selected for the 2026 "Young Science and Technology Talent Cultivation Program
-            (formerly the 'Young Elite Scientists Sponsorship Program')
-            Doctoral Student Special Project" of the China Association for Science and Technology
-          </p>
+          <time class="news-date" datetime="2026-10">2026.10</time>
 
-          <p class="news-cn" lang="zh-CN">
-            入选中国科协2026年度“青年科技人才培育工程（原“青托工程”）博士生专项计划
-          </p>
+          <div class="news-content">
+            <p class="news-en">
+              Selected for the <strong>2026 Doctoral Student Special Plan</strong>
+              under the <strong>Young Science and Technology Talent Cultivation Program</strong>
+              of the <strong>China Association for Science and Technology (CAST)</strong>.
+            </p>
+
+            <p class="news-cn" lang="zh-CN">
+              入选<strong>中国科协2026年度“青年科技人才培育工程博士生专项计划”</strong>
+              （原“青年人才托举工程博士生专项计划”）。
+            </p>
+          </div>
         </article>
       </div>
     </section>
