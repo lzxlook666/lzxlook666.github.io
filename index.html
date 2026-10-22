@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,6 +173,30 @@
       letter-spacing: 0.01em;
     }
 
+    /* NEWS module */
+    .news-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .news-item {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+    }
+
+    .news-en {
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .news-cn {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 8px 0 0;
+    }
+
     .pub-list {
       display: grid;
       gap: 32px;
@@ -292,6 +317,7 @@
   <main class="page">
     <nav class="topbar">
       <a class="active" href="#about">About</a>
+      <a href="#news">NEWS</a>
       <a href="#publications">Publications</a>
       <a href="#links">Links</a>
       <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">◐</button>
@@ -357,14 +383,32 @@
       </div>
     </section>
 
+    <!-- NEWS MODULE START -->
+    <section class="section" id="news">
+      <h2 class="section-title">NEWS</h2>
+
+      <div class="news-list">
+        <article class="news-item">
+          <p class="news-en">
+            Selected for the 2026 "Young Science and Technology Talent Cultivation Program
+            (formerly the 'Young Elite Scientists Sponsorship Program')
+            Doctoral Student Special Project" of the China Association for Science and Technology
+          </p>
+
+          <p class="news-cn" lang="zh-CN">
+            入选中国科协2026年度“青年科技人才培育工程（原“青托工程”）博士生专项计划
+          </p>
+        </article>
+      </div>
+    </section>
+    <!-- NEWS MODULE END -->
+
     <section class="section" id="publications">
       <h2 class="section-title">Publications</h2>
 
       <div class="pub-list">
 
-
-
-<article class="pub-item">
+        <article class="pub-item">
           <div class="pub-thumb">
             <img src="Figure_1.jpg" alt="Experiment conditions">
           </div>
@@ -375,10 +419,10 @@
               </a>
             </div>
             <div class="pub-authors">
-             Zordan, <strong>Lei, Z.</strong>,  Pei, J.
+              Zordan, <strong>Lei, Z.</strong>, Pei, J.
             </div>
             <div class="pub-venue">
-               Developments in the Built Environment, 2026
+              Developments in the Built Environment, 2026
             </div>
             <div class="pub-actions">
               <a href="https://doi.org/10.1016/j.dibe.2026.101070" target="_blank" rel="noopener noreferrer">DOI</a>
@@ -386,9 +430,8 @@
             </div>
           </div>
         </article>
-        
-        
-<article class="pub-item">
+
+        <article class="pub-item">
           <div class="pub-thumb">
             <img src="figure3.png" alt="Visualizing Parametric Density preview">
           </div>
@@ -399,10 +442,10 @@
               </a>
             </div>
             <div class="pub-authors">
-             Zordan, M., Maree, P. J. H., <strong>Lei, Z.</strong>, Xie, T., & Je, S.
+              Zordan, M., Maree, P. J. H., <strong>Lei, Z.</strong>, Xie, T., &amp; Je, S.
             </div>
             <div class="pub-venue">
-              Building Research & Information, 2026
+              Building Research &amp; Information, 2026
             </div>
             <div class="pub-actions">
               <a href="https://doi.org/10.1080/09613218.2026.2691250" target="_blank" rel="noopener noreferrer">DOI</a>
@@ -410,7 +453,7 @@
             </div>
           </div>
         </article>
-        
+
         <article class="pub-item">
           <div class="pub-thumb">
             <img src="mainimage-3.png" alt="Visualizing Parametric Density preview">
