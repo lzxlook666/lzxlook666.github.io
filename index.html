@@ -32,7 +32,20 @@
     }
 
              body {
-     margin: 0;
+               margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.2s ease, color 0.2s ease;
+      
+      /* 👇 新增背景：左上角蓝光 + 右下角黄光 👇 */
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 0% 0%, rgba(79, 128, 255, 0.25), transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(255, 190, 80, 0.2), transparent 50%);
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    /* < margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background-color: var(--bg);
       color: var(--text);
@@ -43,7 +56,7 @@
       background-image: 
         linear-gradient(to right, rgba(79, 128, 255, 0.08) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(79, 128, 255, 0.08) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background-size: 32px 32px;> */
     }
 
     a {
