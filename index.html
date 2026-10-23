@@ -33,140 +33,654 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       font-family: Arial, Helvetica, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.65;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent);
     }
 
     .page {
-      width: min(860px, calc(100% - 40px));
+      max-width: 980px;
       margin: 0 auto;
-      padding: 72px 0 56px;
-      flex: 1;
+      padding: 24px 24px 80px;
     }
 
-    .eyebrow {
-      margin: 0 0 8px;
-      color: var(--accent);
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 6vw, 56px);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-
-    .intro {
-      max-width: 620px;
-      margin: 0 0 36px;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
-    .card {
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--soft);
-    }
-
-    .card h2 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 22px 20px 28px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-      background: var(--bg);
-    }
-
-    .stats {
+    .topbar {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px 10px;
-      margin-bottom: 6px;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      margin-bottom: 44px;
+      color: var(--muted);
     }
 
-    .stat-num {
+    .topbar a.active {
       color: var(--accent);
+      font-weight: 600;
+    }
+
+    .theme-btn {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 17px;
+      color: var(--text);
+      padding: 0;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .name {
+      font-size: 46px;
+      line-height: 1.1;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .name strong {
       font-weight: 700;
     }
 
-    .dot {
-      color: var(--line);
+    .subtitle {
+      max-width: 640px;
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.75;
     }
 
-    .copyright {
+    .subtitle .lab-link {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .subtitle .lab-link:hover {
+      text-decoration: underline;
+    }
+
+    .bio strong {
+      color: var(--accent);
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .bio p {
+      margin: 0 0 18px;
+      font-size: 16px;
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 12px;
+      font-size: 20px;
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .photo-wrap {
+      text-align: left;
+    }
+
+    .profile {
+      width: 100%;
+      max-width: 270px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 2px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+    }
+
+    .photo-contact {
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0 0 20px;
+      letter-spacing: 0.01em;
+    }
+
+    /* NEWS */
+    .news-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 95px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .news-date {
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
+
+    .news-en {
+      font-size: 16px;
+      line-height: 1.7;
       margin: 0;
-      font-size: 13px;
+    }
+
+    .news-cn {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 8px 0 0;
+    }
+
+    .news-en strong,
+    .news-cn strong {
+      font-weight: 700;
+    }
+
+    .pub-list {
+      display: grid;
+      gap: 32px;
+    }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .pub-thumb {
+      width: 120px;
+      height: 90px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .pub-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    body.dark .pub-thumb {
+      background: linear-gradient(135deg, #1b1b1b, #222222);
+    }
+
+    .pub-title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .pub-authors {
+      font-size: 15px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .pub-venue {
+      font-size: 15px;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .pub-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .pub-actions a {
+      display: inline-block;
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .pub-actions a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .links-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 15px;
       color: var(--muted);
     }
 
-    @media (max-width: 520px) {
-      .page {
-        padding-top: 48px;
+    /* 👇 修改了 .footer 的样式，使其支持左右两端对齐 👇 */
+    .footer {
+      margin-top: 54px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+
+    /* 👇 新增的浏览量样式 👇 */
+    .busuanzi-stats {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .busuanzi-num {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
       }
 
-      .dot {
-        display: none;
+      .photo-wrap {
+        order: -1;
       }
 
-      .stats {
+      .profile {
+        max-width: 220px;
+      }
+
+      .news-item {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .pub-item {
+        grid-template-columns: 1fr;
+      }
+
+      .pub-thumb {
+        width: 120px;
+        height: 90px;
+      }
+      
+      .footer {
         flex-direction: column;
-        gap: 2px;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
+
 <body>
   <main class="page">
-    <p class="eyebrow">Personal Page</p>
-    <h1>Zixian Lei</h1>
-    <p class="intro">
-      Welcome to my personal page. You can replace this part with your own content.
-    </p>
+    <nav class="topbar">
+      <a class="active" href="#about">About</a>
+      <a href="#news">NEWS</a>
+      <a href="#publications">Publications</a>
+      <a href="#links">Links</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">◐</button>
+    </nav>
 
-    <section class="card">
-      <h2>About</h2>
-      <p>This is a placeholder section. Put your own introduction here.</p>
+    <section class="hero" id="about">
+      <div>
+        <h1 class="name"><strong>Zixian Lei</strong></h1>
+
+        <div class="subtitle">
+          PhD Student in Intelligent Manufacturing and Robotics (IMR) at the
+          <a
+            class="lab-link"
+            href="https://www.fsv-lab.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Future Spaces Vision (FSV) Lab
+          </a>,
+          School of Design, Southern University of Science and Technology (SUSTech),
+          under the supervision of Prof. Mirna Zordan.
+        </div>
+
+        <div class="bio">
+          <p>
+            I am interested in <strong>Ergonomics</strong>, <strong>Human-Computer Interaction (HCI)</strong>, <strong>Psychology</strong>,
+            and Industrial Design.
+          </p>
+
+          <p>
+            I am skilled in conducting strictly controlled laboratory experiments using
+            physiological instruments and analyzing behavioral and physiological data.
+          </p>
+
+          <p>
+            I am currently affiliated with the
+            <a href="https://www.fsv-lab.com" target="_blank" rel="noopener noreferrer">FSV Lab</a>
+            at SUSTech. I hold a Bachelor of Engineering in Industrial Design and a Master of Arts in Design Studies.
+          </p>
+        </div>
+
+        <div class="socials">
+          <a href="mailto:lzxlook@gmail.com" title="Email">✉</a>
+          <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/" title="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+          <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en" title="Google Scholar" target="_blank" rel="noopener noreferrer">GS</a>
+          <a href="https://orcid.org/0009-0003-8208-3291" title="ORCID" target="_blank" rel="noopener noreferrer">ID</a>
+        </div>
+
+        <div class="small-note">
+          Email available above.
+        </div>
+      </div>
+
+      <div class="photo-wrap">
+        <img
+          class="profile"
+          src="微信图片_20260408145935_104_45.jpg"
+          alt="Portrait of Zixian Lei"
+        />
+        <div class="photo-contact">
+          email: <a href="mailto:lzxlook@gmail.com">lzxlook@gmail.com</a>
+        </div>
+      </div>
     </section>
+
+    <!-- NEWS MODULE START -->
+    <section class="section" id="news">
+      <h2 class="section-title">NEWS</h2>
+
+      <div class="news-list">
+        <article class="news-item">
+          <time class="news-date" datetime="2026-10">2026.10</time>
+
+          <div class="news-content">
+            <p class="news-en">
+              Selected for the <strong>2026 Doctoral Student Special Plan</strong>
+              under the <strong>Young Science and Technology Talent Cultivation Program</strong>
+              of the <strong>China Association for Science and Technology (CAST)</strong>.
+              Selected for the 2026 Doctoral Student Special Plan
+              under the Young Science and Technology Talent Cultivation Program
+              of the China Association for Science and Technology (CAST).
+            </p>
+
+            <p class="news-cn" lang="zh-CN">
+              入选<strong>中国科协2026年度“青年科技人才培育工程博士生专项计划”</strong>
+              （原“青年人才托举工程博士生专项计划”）。
+              入选中国科协2026年度“青年科技人才培育工程（原“青托工程”）博士生专项计划”。
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+    <!-- NEWS MODULE END -->
+
+    <section class="section" id="publications">
+      <h2 class="section-title">Publications</h2>
+
+      <div class="pub-list">
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="Figure_1.jpg" alt="Experiment conditions">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1080/09613218.2026.2691250" target="_blank" rel="noopener noreferrer">
+                Window shading and materiality for psychophysiological stress in hospital waiting areas: a Spatial Frequency perspective through amplitude spectrum slopes in Virtual Reality (JCR Q1/CAS Q2)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Zordan, <strong>Lei, Z.</strong>, Pei, J.
+            </div>
+            <div class="pub-venue">
+              Developments in the Built Environment, 2026
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.dibe.2026.101070" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="waiting.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="figure3.png" alt="Visualizing Parametric Density preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1080/09613218.2026.2691250" target="_blank" rel="noopener noreferrer">
+                The effect of building typology and visual complexity on stress levels through amplitude spectrum analysis (JCR Q2/CAS Q3)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Zordan, M., Maree, P. J. H., <strong>Lei, Z.</strong>, Xie, T., &amp; Je, S.
+            </div>
+            <div class="pub-venue">
+              Building Research &amp; Information, 2026
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1080/09613218.2026.2691250" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="The effect of building typology and visual complexity on stress levels through amplitude spectrum analysis.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="mainimage-3.png" alt="Visualizing Parametric Density preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1145/3811427.3811517" target="_blank" rel="noopener noreferrer">
+                Visualizing Parametric Density through Three-dimensional Amplitude Spectrum Slopes in Urban Canyons (AVI ’26 Poster)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Zordan, M.*, Pei, J., <strong>Lei, Z.</strong>, Qiu, C.
+            </div>
+            <div class="pub-venue">
+              Proceedings of the 2026 International Conference on Advanced Visual Interfaces (AVI ’26), 2026
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1145/3811427.3811517" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="AVI_2026_1f_noise_visualization.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="pleaseshare.png" alt="Please Share preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1145/3772318.3791177" target="_blank" rel="noopener noreferrer">
+                “Please Share”: Promoting Embodied Forms of Interpersonal Stress Sharing Through Real-Time Neurofeedback (CCF-A)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Zordan, M.*, Liu, M., <strong>Lei, Z.</strong>
+            </div>
+            <div class="pub-venue">
+              Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems (CHI ’26), 2026
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1145/3772318.3791177" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="please share.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="nonverbal.png" alt="Nonverbal communication preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1016/j.ergon.2025.103847" target="_blank" rel="noopener noreferrer">
+                Nonverbal Communication between Cars: Influence of Taillight Expressions on Message Delivery Effectiveness (JCR Q1/CAS Q2)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Hou, G., <strong>Lei, Z.*</strong>
+            </div>
+            <div class="pub-venue">
+              International Journal of Industrial Ergonomics, 2025
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.ergon.2025.103847" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="Nonverbal communication between cars.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="hazard.png" alt="Taillight hazard preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002" target="_blank" rel="noopener noreferrer">
+                The Effect of Taillight Shapes and Vehicle Distance on Rearward Drivers’ Hazard Perception (JCR Q1/CAS Q2)
+              </a>
+            </div>
+            <div class="pub-authors">
+              Hou, G., <strong>Lei, Z.*</strong>, Wang, H.*
+            </div>
+            <div class="pub-venue">
+              Transportation Research Part F: Traffic Psychology and Behaviour, 2024
+            </div>
+            <div class="pub-actions">
+              <a href="https://doi.org/10.1016/j.trf.2024.07.002" target="_blank" rel="noopener noreferrer">DOI</a>
+              <a href="The effect of taillight shapes and vehicle distance on rearward.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="角色流变.png" alt="Evolution of Age-Friendly Design Theory preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="角色视角下的适老化设计理论演进_沈旭媛.pdf" target="_blank" rel="noopener noreferrer">
+                Evolution of Age-Friendly Design Theory from the Perspective of Role
+              </a>
+            </div>
+            <div class="pub-authors">
+              Shen, X., Hou, G., <strong>Lei, Z.</strong>
+            </div>
+            <div class="pub-venue">
+              Package &amp; Design, 2024(1), 128–129
+            </div>
+            <div class="pub-actions">
+              <a href="角色视角下的适老化设计理论演进_沈旭媛.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-item">
+          <div class="pub-thumb">
+            <img src="适老化工具.png" alt="Evolution of Design Tools in Age-Friendly Design preview">
+          </div>
+          <div>
+            <div class="pub-title">
+              <a href="适老化设计中设计工具的演进_雷子闲.pdf" target="_blank" rel="noopener noreferrer">
+                Evolution of Design Tools in Age-Friendly Design
+              </a>
+            </div>
+            <div class="pub-authors">
+              <strong>Lei, Z.</strong>, Hou, G.*, Shen, X.
+            </div>
+            <div class="pub-venue">
+              Package &amp; Design, 2024(1), 158–159
+            </div>
+            <div class="pub-actions">
+              <a href="适老化设计中设计工具的演进_雷子闲.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="section" id="links">
+      <h2 class="section-title">Links</h2>
+      <div class="links-line">
+        <a href="mailto:lzxlook@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/zixian-lei-915a721aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+        <a href="https://orcid.org/0009-0003-8208-3291" target="_blank" rel="noopener noreferrer">ORCID</a>
+        <a href="https://www.fsv-lab.com" target="_blank" rel="noopener noreferrer">Lab</a>
+      </div>
+    </section>
+
+    <!-- 👇 修改了这里的 footer，加了统计代码 👇 -->
+    <div class="footer">
+      <div>Last updated: 2026</div>
+      <div class="busuanzi-stats">
+        <span id="busuanzi_container_site_pv">
+          总访问量 <span id="busuanzi_value_site_pv" class="busuanzi-num">加载中...</span> 次
+        </span>
+        <span>·</span>
+        <span id="busuanzi_container_site_uv">
+          总访客数 <span id="busuanzi_value_site_uv" class="busuanzi-num">加载中...</span> 人
+        </span>
+      </div>
+    </div>
   </main>
 
-  <footer class="footer">
-    <div class="stats">
-      <span id="busuanzi_container_site_pv">
-        本站总访问量 <span id="busuanzi_value_site_pv" class="stat-num"></span> 次
-      </span>
-      <span class="dot">·</span>
-      <span id="busuanzi_container_site_uv">
-        本站访客数 <span id="busuanzi_value_site_uv" class="stat-num"></span> 人
-      </span>
-    </div>
-    <p class="copyright">© <span id="year"></span> Zixian Lei</p>
-  </footer>
-
-  <!-- 不蒜子浏览量统计 -->
+  <!-- 👇 在这里加入不蒜子统计脚本 👇 -->
   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    const toggle = document.getElementById('themeToggle');
+
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
   </script>
 </body>
 </html>
