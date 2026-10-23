@@ -30,6 +30,35 @@
     })();
   </script>
 
+  .busuanzi-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 22px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.busuanzi-stats > span {
+  white-space: nowrap;
+}
+
+.busuanzi-num {
+  margin-left: 5px;
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 手机端显示为两列 */
+@media (max-width: 650px) {
+  .busuanzi-stats {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 8px 24px;
+  }
+}
+
   <style>
     /* ===== 全局配色：修改这里即可调整页面风格 ===== */
 
@@ -1516,25 +1545,37 @@
 
     <!-- 页脚 -->
     <footer class="footer">
-      <span>Zixian Lei · Last updated 2026</span>
 
-      <div class="busuanzi-stats" aria-label="Site statistics">
-        <span id="busuanzi_container_site_pv">
-          Page views
-          <span
-            id="busuanzi_value_site_pv"
-            class="busuanzi-num"
-          >—</span>
-        </span>
+  <span>Zixian Lei · Last updated 2026</span>
 
-        <span id="busuanzi_container_site_uv">
-          Visitors
-          <span
-            id="busuanzi_value_site_uv"
-            class="busuanzi-num"
-          >—</span>
-        </span>
-      </div>
+  <div class="busuanzi-stats" aria-label="Site statistics">
+    <span>
+      Visitors today
+      <span id="busuanzi_today_uv" class="busuanzi-num">—</span>
+    </span>
+
+    <span>
+      Total visitors
+      <span id="busuanzi_site_uv" class="busuanzi-num">—</span>
+    </span>
+
+    <span>
+      Views today
+      <span id="busuanzi_today_pv" class="busuanzi-num">—</span>
+    </span>
+
+    <span>
+      Total views
+      <span id="busuanzi_site_pv" class="busuanzi-num">—</span>
+    </span>
+  </div>
+
+</footer>
+
+<script
+  defer
+  src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"
+></script>
     </footer>
   </div>
 
