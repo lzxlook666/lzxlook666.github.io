@@ -32,8 +32,12 @@
     }
 
              body {
-      /* ... 保留你原来的属性 ... */
-      
+     margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      transition: background 0.2s ease, color 0.2s ease;
       /* 👇 新增背景：左上角蓝光 + 右下角紫光 👇 */
       background-color: var(--bg);
       background-image: 
