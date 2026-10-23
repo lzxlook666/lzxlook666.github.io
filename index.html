@@ -31,7 +31,7 @@
       scroll-behavior: smooth;
     }
 
-       body {
+          body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background-color: var(--bg);
@@ -39,9 +39,10 @@
       line-height: 1.65;
       transition: background 0.2s ease, color 0.2s ease;
       
-      /* 👇 新增：点阵网格背景 👇 */
-      background-image: radial-gradient(var(--line) 1px, transparent 1px);
-      background-size: 24px 24px;
+      /* 👇 新增：顶部光晕背景 👇 */
+      background-image: radial-gradient(circle at 50% -20%, rgba(79, 128, 255, 0.15), transparent 50%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
     a {
