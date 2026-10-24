@@ -1,71 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-motion="paused">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta
-    name="description"
-    content="Zixian Lei — PhD student at SUSTech. Research in Ergonomics, Human–Computer Interaction(HCI), Psychology, and Industrial Design."
-  >
-  <meta name="theme-color" content="#fafbf9">
-
+  <meta name="theme-color" content="#f5fbff">
+  <meta name="description" content="Zixian Lei — research in ergonomics, human–computer interaction, psychology, and industrial design.">
   <title>Zixian Lei · Research & Design</title>
 
-  <script>
-    (() => {
-      let stored;
-
-      try {
-        stored = localStorage.getItem("zixian-theme");
-      } catch (_) {}
-
-      const theme =
-        stored === "dark" || stored === "light"
-          ? stored
-          : matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-
-      document.documentElement.dataset.theme = theme;
-    })();
-  </script>
-
-
-
   <style>
-    /* ===== 全局配色：修改这里即可调整页面风格 ===== */
-
     :root {
-      color-scheme: light;
-
-      --bg: #fafbf9;
-      --surface: #ffffff;
-      --text: #202927;
-      --muted: #646f6b;
-      --line: #dfe5e1;
-      --accent: #315eae;
-      --tint: #eef2f9;
-
-      --serif: Georgia, "Times New Roman", serif;
-      --sans:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        "Microsoft YaHei",
-        sans-serif;
-    }
-
-    html[data-theme="dark"] {
-      color-scheme: dark;
-
-      --bg: #141a18;
-      --surface: #1b2320;
-      --text: #e9eee9;
-      --muted: #a3b0a8;
-      --line: #303c35;
-      --accent: #9bbcf7;
-      --tint: #253044;
+      --ink: #21425a;
+      --muted: #678094;
+      --blue: #2675d6;
+      --line: #d8e8f3;
+      --pale: #edf7ff;
+      --mono: Consolas, 'Courier New', monospace;
+      --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Arial, 'Microsoft YaHei', sans-serif;
+      --friend-size: 24px;
+      --hanger-height: 7px;
     }
 
     * {
@@ -74,32 +27,30 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 28px;
+      scroll-padding-top: 115px;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font: 16px / 1.75 var(--sans);
+      padding-top: 49px;
+      background: #f7fcff;
+      color: var(--ink);
+      font: 15px/1.75 var(--sans);
       -webkit-font-smoothing: antialiased;
     }
 
     body::before {
-      content: "";
-      pointer-events: none;
-      position: absolute;
-      z-index: -1;
-      top: 50px;
-      right: 0;
-      width: 55%;
-      height: 600px;
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
       background:
         radial-gradient(
-          ellipse at 65% 35%,
-          rgba(96, 136, 190, 0.07),
-          transparent 65%
-        );
+          ellipse at 88% 16%,
+          #e4f5ff,
+          transparent 55%
+        ),
+        linear-gradient(#fcfeff, #f2faff);
     }
 
     a {
@@ -109,129 +60,173 @@
     }
 
     a:hover {
-      color: var(--accent);
+      color: var(--blue);
     }
 
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 5px;
-      border-radius: 3px;
-    }
-
-    button {
+    button,
+    input {
       font: inherit;
     }
 
-    img {
-      max-width: 100%;
+    button {
+      cursor: pointer;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #5a9ce9;
+      outline-offset: 5px;
+    }
+
+    ::selection {
+      background: #c7eaff;
     }
 
     img[hidden] {
       display: none !important;
     }
 
-    ::selection {
-      background: #d9e5fa;
-      color: #1b304b;
+    /* Tiny hanging ice cubes */
+    .ice-friends {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9;
     }
 
-    .skip-link {
+    .shelf-wash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 47px;
+      background: linear-gradient(
+        #f5fbfffc 70%,
+        #f5fbff00
+      );
+      z-index: 8;
+      border-top: 2px solid #d2e8f5;
+    }
+
+    .tiny-friend,
+    .falling-friend {
       position: absolute;
-      top: -60px;
-      left: 20px;
-      z-index: 10;
-      padding: 6px 14px;
-      background: var(--text);
-      color: var(--bg);
+      top: 0;
+      left: var(--anchor);
+      width: var(--friend-size);
+      height: calc(
+        var(--friend-size) + var(--hanger-height)
+      );
+      transform: translateX(-50%);
+      transform-origin: 50% 0;
     }
 
-    .skip-link:focus {
-      top: 12px;
+    .tiny-friend .hanger {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: calc(var(--hanger-height) + 3px);
+      background: #b8d6e4;
     }
 
+    .tiny-friend .hanger::before {
+      content: '';
+      position: absolute;
+      left: -1px;
+      top: 0;
+      width: 3px;
+      height: 2px;
+      background: #bfdce9;
+    }
+
+    .tiny-friend img,
+    .falling-friend img {
+      display: block;
+      position: absolute;
+      top: var(--hanger-height);
+      left: 0;
+      width: 100%;
+      height: var(--friend-size);
+      image-rendering: pixelated;
+    }
+
+    .tiny-friend.is-replenishing img {
+      animation: replenish .85s ease-out both;
+    }
+
+    @keyframes replenish {
+      from {
+        opacity: .18;
+        transform: scale(.6, .72);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    html[data-motion="paused"] .tiny-friend img {
+      animation-play-state: paused;
+    }
+
+    .falling-friend {
+      will-change: transform, opacity;
+    }
+
+    /* Page layout */
     .page {
-      width: min(1080px, calc(100% - 96px));
-      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      width: min(1080px, calc(100% - 88px));
+      margin: auto;
     }
-
-    /* ===== 顶部导航 ===== */
 
     .topbar {
-      min-height: 106px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 28px;
+      align-items: center;
+      gap: 25px;
+      min-height: 79px;
       border-bottom: 1px solid var(--line);
     }
 
-    .wordmark {
-      font: 700 25px / 1 var(--serif);
-      letter-spacing: -1.8px;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
 
-    .wordmark span {
-      color: var(--accent);
+    .brand img {
+      width: 27px;
+      height: 27px;
+      image-rendering: pixelated;
     }
 
-    .nav-links {
+    .nav {
       display: flex;
       align-items: center;
-      gap: 30px;
-      font-size: 13px;
-      color: var(--muted);
+      gap: 28px;
+      color: #66859a;
+      font-size: 12px;
+      font-weight: 600;
     }
 
-    .nav-links a {
-      position: relative;
-      padding: 8px 0;
+    .nav a:first-child {
+      color: var(--blue);
     }
-
-    .nav-links a.active {
-      color: var(--text);
-    }
-
-    .nav-links a.active::after {
-      content: "";
-      position: absolute;
-      bottom: 1px;
-      left: 0;
-      width: 16px;
-      height: 2px;
-      background: var(--accent);
-    }
-
-    .theme-btn {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      padding: 0;
-      color: var(--muted);
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .theme-btn:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-    }
-
-    .theme-btn svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    /* ===== 个人介绍 ===== */
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 246px;
-      gap: 88px;
-      padding: 68px 0 66px;
+      grid-template-columns: minmax(0, 1fr) 239px;
+      align-items: start;
+      gap: 91px;
+      padding: 57px 0 44px;
     }
 
     .eyebrow {
@@ -239,300 +234,334 @@
       align-items: center;
       gap: 10px;
       margin: 0 0 21px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
+      color: #5c9abe;
+      font: 10px/1.5 var(--mono);
+      letter-spacing: .1em;
     }
 
     .eyebrow::before {
-      content: "";
-      width: 25px;
-      height: 1px;
-      background: var(--accent);
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #66c9e7;
+      box-shadow: 3px -3px #c6f0fc;
     }
 
-    .name {
-      margin: 0 0 17px;
-      font: 400 clamp(50px, 5.8vw, 76px) / 1.05 var(--serif);
-      letter-spacing: -0.055em;
+    h1 {
+      margin: 0 0 22px;
+      font-size: clamp(53px, 6vw, 76px);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.06em;
+    }
+
+    h1 span {
+      color: var(--blue);
     }
 
     .role {
-      max-width: 590px;
-      margin: 0 0 18px;
-      font-size: 19px;
-      font-weight: 500;
-      line-height: 1.55;
-      letter-spacing: -0.02em;
+      max-width: 580px;
+      margin: 0 0 17px;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -.015em;
     }
 
     .affiliation {
-      margin: 0 0 25px;
-      font-size: 14px;
+      margin: 0 0 24px;
+      font-size: 13px;
       line-height: 1.9;
       color: var(--muted);
     }
 
     .affiliation a {
-      color: var(--accent);
-    }
-
-    .affiliation a:hover {
-      text-decoration: underline;
+      color: var(--blue);
     }
 
     .bio {
-      max-width: 655px;
-    }
-
-    .bio p {
       margin: 0 0 13px;
-      color: var(--muted);
       font-size: 14px;
       line-height: 1.85;
+      color: #607d91;
     }
 
     .bio strong {
-      color: var(--text);
+      color: #355c78;
       font-weight: 600;
     }
 
-    .bio .education {
-      margin-top: 18px;
-      font-size: 12px;
+    .education {
+      margin: 21px 0 0;
+      color: #7892a5;
+      font-size: 11px;
     }
 
     .socials {
       display: flex;
       flex-wrap: wrap;
-      gap: 11px 23px;
-      margin-top: 25px;
+      gap: 15px 23px;
+      margin-top: 26px;
+      align-items: center;
       font-size: 12px;
       font-weight: 600;
     }
 
-    .socials a {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 3px 0;
+    .socials .primary {
+      padding: 7px 12px;
+      color: white;
+      background: var(--blue);
+      box-shadow: 3px 3px #c1dff9;
     }
 
-    .socials span {
-      color: var(--accent);
-      font-size: 15px;
+    .socials a:not(.primary) {
+      color: #4a7594;
     }
 
-    /* ===== 照片 ===== */
-
-    .photo-wrap {
-      margin: 31px 0 0;
+    .portrait {
+      margin: 17px 0 0;
     }
 
     .portrait-frame {
       position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 5;
       overflow: hidden;
-      border-radius: 6px;
-      background: #e8eeeb;
+      aspect-ratio: 4/5;
+      background: #ebf8ff;
+      border: 1px solid #d1e8f6;
+      border-radius: 4px;
+      box-shadow: 5px 5px #e2f0fa;
     }
 
     .portrait-fallback {
       position: absolute;
       inset: 0;
-      display: grid;
-      align-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      text-align: center;
-      color: #71877d;
-      background: linear-gradient(155deg, #e7eeea, #dbe4e1);
-    }
-
-    .portrait-fallback::before {
-      content: "";
-      position: absolute;
-      top: 40px;
-      left: 44px;
-      width: 158px;
-      height: 158px;
-      border: 1px solid #c7d4cd;
-      border-radius: 50%;
+      background-image:
+        linear-gradient(
+          #d9eff84d 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          #d9eff84d 1px,
+          transparent 1px
+        );
+      background-size: 20px 20px;
     }
 
     .portrait-fallback span {
-      position: relative;
-      font: 400 76px / 1 var(--serif);
-      letter-spacing: -0.08em;
+      margin-top: 7px;
+      color: #5c97bb;
+      font: 10px/1.6 var(--mono);
     }
 
-    .portrait-fallback small {
-      position: relative;
-      margin-top: 18px;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
+    .portrait-fallback span.profile-initials {
+      display: block;
+      margin: 0;
+      color: #8ab7d5;
+      font: 800 57px/1 var(--sans);
+      letter-spacing: -5px;
     }
 
     .profile {
-      position: relative;
       display: block;
+      position: relative;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 50% 35%;
+      object-position: center 35%;
     }
 
-    .photo-caption {
+    .portrait figcaption {
       margin-top: 15px;
+      color: #7b97aa;
       font-size: 11px;
       line-height: 1.8;
-      color: var(--muted);
     }
 
-    .photo-caption strong {
-      display: block;
-      color: var(--text);
+    .portrait figcaption strong {
+      color: #426b86;
       font-weight: 600;
-      letter-spacing: 0.02em;
     }
 
-    /* ===== 通用分区 ===== */
+    /* Animation controls */
+    .controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 0 0 36px;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      background: #ffffffe6;
+      box-shadow: 3px 3px #e8f3fb;
+    }
 
+    .controls .label {
+      margin-right: auto;
+      color: #78a0b7;
+      font: 10px/1.5 var(--mono);
+    }
+
+    .controls .label i {
+      color: #60b9da;
+      font-style: normal;
+    }
+
+    .speed-control {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #7897ac;
+      font: 10px/1.5 var(--mono);
+    }
+
+    .speed-control input {
+      width: 85px;
+      accent-color: #4d98e4;
+      cursor: pointer;
+    }
+
+    .control-btn {
+      border: 1px solid #cfe2f1;
+      color: #537e9c;
+      background: #fbfdff;
+      padding: 6px 11px;
+      font: 10px/1.5 var(--mono);
+    }
+
+    .control-btn:hover {
+      border-color: #8fbce6;
+      color: var(--blue);
+    }
+
+    /* Content sections */
     .section {
-      padding: 40px 0 14px;
+      padding: 29px 0 25px;
       border-top: 1px solid var(--line);
     }
 
-    .section-ing {
+    .section-heading {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 27px;
+      gap: 18px;
+      margin-bottom: 25px;
     }
 
-    .section-title {
+    .section-heading h2 {
       margin: 0;
-      font: 400 30px / 1.2 var(--serif);
-      letter-spacing: -0.025em;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: -.7px;
     }
 
-    .section-meta {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.01em;
+    .section-heading small {
+      font: 10px/1.5 var(--mono);
+      color: #8ba8bc;
     }
-
-    /* ===== 新闻 ===== */
 
     .news-item {
       display: grid;
-      grid-template-columns: 100px minmax(0, 1fr);
-      gap: 30px;
-      padding-bottom: 29px;
+      grid-template-columns: 91px minmax(0, 1fr);
+      gap: 25px;
     }
 
-    .news-date {
-      padding-top: 2px;
-      font-size: 12px;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
+    .news-item time {
+      color: var(--blue);
+      font: 11px/1.9 var(--mono);
+      padding-top: 1px;
     }
 
-    .news-en {
+    .news-item p {
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.8;
+      color: #59788f;
     }
 
-    .news-cn {
-      margin: 8px 0 0;
+    .news-item .news-cn {
+      margin-top: 7px;
+      color: #8ba0af;
       font-size: 12px;
-      color: var(--muted);
-      line-height: 1.9;
     }
 
-    /* ===== 论文列表 ===== */
-
+    /* Publications */
     .pub-list {
       display: grid;
     }
 
     .pub-item {
       display: grid;
-      grid-template-columns: 174px minmax(0, 1fr);
-      gap: 30px;
-      align-items: start;
-      padding: 29px 0;
+      grid-template-columns: 155px minmax(0, 1fr);
+      gap: 28px;
+      padding: 27px 0;
       border-top: 1px solid var(--line);
     }
 
     .pub-item:first-child {
-      padding-top: 3px;
       border-top: 0;
+      padding-top: 0;
     }
 
     .pub-thumb {
-      position: relative;
-      aspect-ratio: 4 / 3;
       display: grid;
       place-items: center;
+      position: relative;
+      align-self: start;
+      width: 155px;
+      height: 116px;
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 5px;
-      background: var(--surface);
+      background: #ecf7ff;
+      border: 1px solid #d5e9f7;
+      border-radius: 3px;
     }
 
-    .thumb-fallback {
+    .pub-thumb span {
       position: absolute;
-      font: italic 40px / 1 var(--serif);
-      letter-spacing: -0.06em;
-      color: var(--line);
+      font: 22px/1 var(--mono);
+      letter-spacing: -2px;
+      color: #bad9ec;
     }
 
     .pub-thumb img {
-      position: relative;
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
-      background: var(--surface);
+      position: relative;
+      background: #fff;
     }
 
-    .pub-title {
-      margin: -3px 0 10px;
+    .pub-content h3 {
+      margin: -3px 0 9px;
       font-size: 16px;
       font-weight: 600;
       line-height: 1.55;
-      letter-spacing: -0.014em;
+      letter-spacing: -.015em;
     }
 
-    .pub-title a:hover {
+    .pub-content h3 a:hover {
       text-decoration: underline;
     }
 
-    .pub-authors {
-      margin-bottom: 5px;
-      font-size: 13px;
-      color: var(--muted);
+    .pub-authors,
+    .pub-venue {
+      margin: 0 0 6px;
+      color: #7290a4;
+      font-size: 12px;
+      line-height: 1.7;
     }
 
     .pub-authors strong {
-      color: var(--text);
+      color: #365e7b;
       font-weight: 600;
-      text-decoration: underline;
-      text-decoration-color: var(--line);
-      text-underline-offset: 3px;
     }
 
     .pub-venue {
       margin-bottom: 11px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
     }
 
     .pub-actions {
@@ -540,250 +569,241 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 7px;
+      font-size: 10px;
+    }
+
+    .pub-actions a,
+    .pub-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border: 1px solid #d3e6f4;
+      border-radius: 2px;
+      color: #6088a5;
+      background: #fff;
     }
 
     .pub-badge {
-      margin-right: 3px;
-      padding: 3px 8px;
-      border-radius: 3px;
-      color: var(--accent);
-      background: var(--tint);
-      font-size: 10px;
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    .pub-actions a {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 10px;
-      line-height: 1.5;
-      border: 1px solid var(--line);
-      padding: 3px 9px;
-      border-radius: 3px;
-      color: var(--muted);
-    }
-
-    .pub-actions a::after {
-      content: "↗";
-      font-size: 11px;
+      color: #4782b1;
+      background: #eaf4fe;
+      border-color: transparent;
     }
 
     .pub-actions a:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: var(--tint);
+      border-color: #78ace0;
+      color: var(--blue);
     }
-
-    /* ===== 其他链接与页脚 ===== */
 
     .links-line {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px 29px;
-      padding-bottom: 28px;
-      font-size: 13px;
+      gap: 15px 26px;
+      font-size: 12px;
+      color: #5c87a6;
+      padding-bottom: 9px;
     }
 
-    .links-line a::after {
-      content: " ↗";
-      color: var(--accent);
-    }
-
-    .footer {
+    footer {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 16px;
-      padding: 23px 0 34px;
+      gap: 18px;
+      padding: 23px 0 32px;
       border-top: 1px solid var(--line);
       font-size: 10px;
-      color: var(--muted);
+      color: #8ba5b8;
     }
 
-    .busuanzi-stats {
+    .visitor-stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 13px;
+      gap: 8px 17px;
+      font-size: 10px;
+    }
+
+    .visitor-stats > span {
+      white-space: nowrap;
+    }
+
+    .visitor-stats b {
+      margin-left: 4px;
+      color: #6399bf;
+      font-weight: 500;
       font-variant-numeric: tabular-nums;
     }
 
-    .busuanzi-num {
-      color: var(--text);
-    }
-
-    /* ===== 大屏幕 ===== */
-
-    @media (min-width: 1400px) {
-      .hero {
-        padding-top: 82px;
-        padding-bottom: 78px;
-      }
-    }
-
-    /* ===== 平板 ===== */
-
+    /* Responsive layout */
     @media (max-width: 900px) {
       .page {
-        width: calc(100% - 64px);
+        width: calc(100% - 60px);
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr) 205px;
-        gap: 40px;
-        padding-top: 56px;
-      }
-
-      .portrait-fallback::before {
-        left: 24px;
+        grid-template-columns: minmax(0, 1fr) 200px;
+        gap: 39px;
       }
 
       .role {
-        font-size: 18px;
+        font-size: 17px;
       }
 
       .pub-item {
-        grid-template-columns: 150px minmax(0, 1fr);
-        gap: 24px;
+        grid-template-columns: 130px minmax(0, 1fr);
+        gap: 22px;
+      }
+
+      .pub-thumb {
+        width: 130px;
+        height: 98px;
       }
     }
 
-    /* ===== 手机 ===== */
-
     @media (max-width: 650px) {
+      :root {
+        --friend-size: 22px;
+        --hanger-height: 6px;
+      }
+
+      body {
+        padding-top: 42px;
+      }
+
+      .shelf-wash {
+        height: 40px;
+      }
+
       .page {
-        width: calc(100% - 40px);
+        width: calc(100% - 38px);
       }
 
       .topbar {
-        min-height: 82px;
-        gap: 20px;
+        min-height: 70px;
+        gap: 15px;
       }
 
-      .nav-links {
-        gap: 17px;
-        font-size: 12px;
-      }
-
-      .nav-links a[href="#links"] {
-        display: none;
-      }
-
-      .theme-btn {
-        width: 30px;
-        height: 30px;
+      .nav {
+        gap: 16px;
+        font-size: 11px;
       }
 
       .hero {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 29px;
-        padding: 43px 0 38px;
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 37px 0 29px;
       }
 
       .eyebrow {
         font-size: 9px;
-        margin-bottom: 17px;
+        margin-bottom: 18px;
       }
 
-      .name {
-        font-size: 57px;
-        margin-bottom: 20px;
+      h1 {
+        font-size: 59px;
+        margin-bottom: 21px;
       }
 
       .role {
-        font-size: 18px;
+        font-size: 17px;
       }
 
       .affiliation {
         font-size: 12px;
       }
 
-      .bio p {
+      .bio {
         font-size: 13px;
       }
 
-      .socials {
-        gap: 12px 21px;
-        font-size: 12px;
+      .education {
+        font-size: 11px;
+        line-height: 1.8;
       }
 
-      .photo-wrap {
-        margin: 0;
+      .socials {
+        font-size: 11px;
+        gap: 12px 19px;
+      }
+
+      .portrait {
         display: flex;
         align-items: center;
-        gap: 19px;
+        gap: 17px;
+        margin: 0;
       }
 
       .portrait-frame {
-        width: 92px;
-        flex: 0 0 92px;
-        aspect-ratio: 4 / 5;
-        border-radius: 4px;
+        width: 91px;
+        flex: 0 0 91px;
       }
 
       .portrait-fallback span {
-        font-size: 40px;
-      }
-
-      .portrait-fallback small,
-      .portrait-fallback::before {
         display: none;
       }
 
-      .photo-caption {
+      .portrait-fallback span.profile-initials {
+        font-size: 28px;
+        letter-spacing: -2px;
+      }
+
+      .portrait figcaption {
         margin-top: 0;
-        font-size: 12px;
+      }
+
+      .controls {
+        gap: 12px;
+        padding: 12px;
+      }
+
+      .controls .label {
+        width: 100%;
+      }
+
+      .speed-control {
+        margin-right: auto;
+      }
+
+      .speed-control input {
+        width: 68px;
+      }
+
+      .control-btn {
+        font-size: 10px;
+        padding: 6px 8px;
       }
 
       .section {
-        padding-top: 29px;
+        padding-top: 24px;
       }
 
-      .section-heading {
-        margin-bottom: 23px;
-        gap: 12px;
+      .section-heading h2 {
+        font-size: 23px;
       }
 
-      .section-title {
-        font-size: 27px;
-      }
-
-      .section-meta {
-        font-size: 11px;
+      .section-heading small {
+        font-size: 9px;
       }
 
       .news-item {
         grid-template-columns: 1fr;
-        gap: 9px;
-        padding-bottom: 23px;
+        gap: 8px;
       }
 
-      .news-date {
-        font-size: 12px;
-      }
-
-      .news-en {
-        font-size: 13px;
-      }
-
-      .news-cn {
+      .news-item p {
         font-size: 12px;
       }
 
       .pub-item {
         grid-template-columns: 1fr;
-        gap: 17px;
-        padding: 25px 0;
+        gap: 16px;
+        padding: 23px 0;
       }
 
       .pub-thumb {
         width: 100%;
-        max-height: 180px;
-        aspect-ratio: 16 / 8;
+        height: 145px;
       }
 
-      .pub-title {
+      .pub-content h3 {
         font-size: 15px;
       }
 
@@ -792,19 +812,34 @@
         font-size: 12px;
       }
 
-      .pub-actions a,
-      .pub-badge {
+      .pub-actions {
         font-size: 11px;
       }
 
-      .links-line {
-        gap: 12px 22px;
-        font-size: 12px;
+      footer {
+        align-items: start;
+        flex-direction: column;
       }
 
-      .footer {
-        flex-direction: column;
-        padding-bottom: 24px;
+      .visitor-stats {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        gap: 8px 25px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 359px) {
+      h1 {
+        font-size: 52px;
+      }
+
+      .nav {
+        gap: 12px;
+      }
+
+      .speed-control {
+        width: 100%;
       }
     }
 
@@ -812,31 +847,20 @@
       html {
         scroll-behavior: auto;
       }
+
+      html:not([data-user-motion="true"]) .tiny-friend img {
+        animation: none !important;
+      }
     }
 
     @media print {
-      :root,
-      html[data-theme="dark"] {
-        --bg: #ffffff;
-        --text: #111111;
-        --muted: #444444;
-        --line: #dddddd;
-      }
-
-      .page {
-        width: 100%;
-      }
-
-      .topbar,
-      .theme-btn,
-      .busuanzi-stats,
-      .skip-link {
+      .ice-friends,
+      .controls {
         display: none;
       }
 
-      .hero {
+      body {
         padding-top: 0;
-        padding-bottom: 25px;
       }
 
       .pub-item {
@@ -844,99 +868,40 @@
       }
     }
   </style>
-  <style>
-  .busuanzi-stats {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 10px 22px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .busuanzi-stats > span {
-    white-space: nowrap;
-  }
-
-  .busuanzi-num {
-    margin-left: 5px;
-    color: var(--accent);
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-  }
-
-  @media (max-width: 650px) {
-    .busuanzi-stats {
-      display: grid;
-      grid-template-columns: repeat(2, max-content);
-      gap: 8px 24px;
-    }
-  }
-</style>
 </head>
 
 <body>
-  <a class="skip-link" href="#about">Skip to content</a>
+  <div class="shelf-wash" aria-hidden="true"></div>
+  <div class="ice-friends" id="ice-friends" aria-hidden="true"></div>
 
   <div class="page">
-    <!-- 顶部导航 -->
     <header class="topbar">
       <a
-        class="wordmark"
         href="#about"
+        class="brand"
         aria-label="Zixian Lei, home"
       >
-        ZL<span>.</span>
+        <img id="brand-friend" alt="">
+        ZL.
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
-        <a
-          class="active"
-          href="#about"
-          aria-current="location"
-        >About</a>
-
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#about">About</a>
         <a href="#news">News</a>
         <a href="#publications">Publications</a>
-        <a href="#links">Links</a>
-
-        <button
-          class="theme-btn"
-          id="themeToggle"
-          type="button"
-          aria-label="Use dark theme"
-          aria-pressed="false"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="8"></circle>
-            <path
-              d="M12 4a8 8 0 0 0 0 16Z"
-              fill="currentColor"
-              stroke="none"
-            ></path>
-          </svg>
-        </button>
       </nav>
     </header>
 
     <main>
-      <!-- 个人介绍 -->
+      <!-- About -->
       <section class="hero" id="about" aria-labelledby="name">
         <div>
-          <p class="eyebrow">
-            PSYCHOLOGY · HCI · DESIGN
-          </p>
+          <p class="eyebrow">PSYCHOLOGY · HCI · DESIGN</p>
 
-          <h1 class="name" id="name">Zixian Lei</h1>
+          <h1 id="name">Zixian <span>Lei</span></h1>
 
           <p class="role">
-            PhD Student in Intelligent Manufacturing<br>
+            PhD Student in Intelligent Manufacturing
             and Robotics (IMR)
           </p>
 
@@ -947,72 +912,55 @@
               rel="noopener noreferrer"
             >Future Spaces Vision (FSV) Lab ↗</a>
             · School of Design<br>
-
             Southern University of Science and Technology (SUSTech)<br>
-
             Supervised by Prof. Mirna Zordan
           </p>
 
-          <div class="bio">
-            <p>
- <p>
-  My research bridges <strong>Ergonomics</strong>,
-  <strong>Human–Computer Interaction (HCI)</strong>,
-  <strong>Psychology</strong>, and
-  <strong>Industrial Design</strong>.
-</p>
+          <p class="bio">
+            My research bridges <strong>Ergonomics</strong>,
+            <strong>Human–Computer Interaction (HCI)</strong>,
+            <strong>Psychology</strong>, and
+            <strong>Industrial Design</strong>.
+          </p>
 
-<p>
-  I combine rigorously controlled laboratory experiments with
-  <strong>Physiological Computing</strong> and the processing
-  and analysis of behavioral and physiological data.
-</p>
+          <p class="bio">
+            I combine rigorously controlled laboratory experiments
+            with <strong>Physiological Computing</strong> and the
+            processing and analysis of behavioral and physiological data.
+          </p>
 
-            <p class="education">
-              Bachelor of Engineering in Industrial Design ·
-              Master of Arts in Design Studies
-            </p>
-          </div>
+          <p class="education">
+            Bachelor of Engineering in Industrial Design ·
+            Master of Arts in Design Studies
+          </p>
 
-          <div
-            class="socials"
-            aria-label="Contact and academic profiles"
-          >
-            <a href="mailto:lzxlook@gmail.com">
-              Email <span aria-hidden="true">↗</span>
+          <div class="socials">
+            <a class="primary" href="mailto:lzxlook@gmail.com">
+              Email ↗
             </a>
-
             <a
               href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&amp;hl=en"
               target="_blank"
               rel="noopener noreferrer"
-            >
-              Google Scholar <span aria-hidden="true">↗</span>
-            </a>
-
+            >Google Scholar ↗</a>
             <a
               href="https://www.linkedin.com/in/zixian-lei-915a721aa/"
               target="_blank"
               rel="noopener noreferrer"
-            >
-              LinkedIn <span aria-hidden="true">↗</span>
-            </a>
-
+            >LinkedIn ↗</a>
             <a
               href="https://orcid.org/0009-0003-8208-3291"
               target="_blank"
               rel="noopener noreferrer"
-            >
-              ORCID <span aria-hidden="true">↗</span>
-            </a>
+            >ORCID ↗</a>
           </div>
         </div>
 
-        <figure class="photo-wrap">
+        <figure class="portrait">
           <div class="portrait-frame">
             <div class="portrait-fallback" aria-hidden="true">
-              <span>ZL.</span>
-              <small>Zixian Lei</small>
+              <span class="profile-initials">ZL.</span>
+              <span>Zixian Lei</span>
             </div>
 
             <img
@@ -1023,8 +971,8 @@
             >
           </div>
 
-          <figcaption class="photo-caption">
-            <strong>Zixian Lei</strong>
+          <figcaption>
+            <strong>Zixian Lei</strong><br>
             School of Design, SUSTech<br>
             <a href="mailto:lzxlook@gmail.com">
               lzxlook@gmail.com
@@ -1033,24 +981,60 @@
         </figure>
       </section>
 
-      <!-- 新闻 -->
+      <!-- Animation controls -->
+      <div
+        class="controls"
+        role="group"
+        aria-label="Animation controls"
+      >
+        <span class="label">
+          <i>□</i> TINY ICE DRIZZLE · ONE LITTLE DROP AT A TIME
+        </span>
+
+        <label class="speed-control" for="fall-speed">
+          Fall speed
+          <input
+            id="fall-speed"
+            type="range"
+            min="0.6"
+            max="1.4"
+            step="0.05"
+            value="0.85"
+            aria-valuetext="Slow"
+          >
+        </label>
+
+        <button
+          class="control-btn"
+          type="button"
+          id="replay-animation"
+        >↺ Replay</button>
+
+        <button
+          class="control-btn"
+          type="button"
+          id="pause-animation"
+          aria-label="Pause animation"
+          aria-pressed="false"
+        >Ⅱ Pause</button>
+      </div>
+
+      <!-- News -->
       <section
         class="section"
         id="news"
         aria-labelledby="news-title"
       >
         <div class="section-heading">
-          <h2 class="section-title" id="news-title">News</h2>
-          <span class="section-meta">Latest update</span>
+          <h2 id="news-title">News</h2>
+          <small>LATEST UPDATE</small>
         </div>
 
         <article class="news-item">
-          <time class="news-date" datetime="2026-10">
-            Oct 2026
-          </time>
+          <time datetime="2026-10">2026.10</time>
 
           <div>
-            <p class="news-en">
+            <p>
               Selected for the 2026 Doctoral Student Special Plan
               under the Young Science and Technology Talent
               Cultivation Program of the China Association for
@@ -1064,632 +1048,984 @@
         </article>
       </section>
 
-      <!-- 论文 -->
+      <!-- Publications -->
       <section
         class="section"
         id="publications"
         aria-labelledby="publications-title"
       >
         <div class="section-heading">
-          <h2 class="section-title" id="publications-title">
-            Publications
-          </h2>
-
-          <span class="section-meta">
-            08 publications · 2024–2026
-          </span>
+          <h2 id="publications-title">Publications</h2>
+          <small>08 PAPERS · 2024–2026</small>
         </div>
 
         <div class="pub-list">
-
-          <!-- 论文 1 -->
+          <!-- Publication 01 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                01
-              </span>
-
+              <span aria-hidden="true">01</span>
               <img
+                loading="lazy"
                 src="Figure_1.jpg"
                 alt="Experiment conditions"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1016/j.dibe.2026.101070"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Window shading and materiality for
-                  psychophysiological stress in hospital waiting
-                  areas: a Spatial Frequency perspective through
-                  amplitude spectrum slopes in Virtual Reality
-                </a>
-              </div>
+                >Window shading and materiality for psychophysiological
+                  stress in hospital waiting areas: a Spatial Frequency
+                  perspective through amplitude spectrum slopes in
+                  Virtual Reality</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Zordan, <strong>Lei, Z.</strong>, Pei, J.
-              </div>
+              </p>
 
-              <div class="pub-venue">
+              <p class="pub-venue">
                 Developments in the Built Environment, 2026
-              </div>
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">JCR Q1 · CAS Q2</span>
-
                 <a
                   href="https://doi.org/10.1016/j.dibe.2026.101070"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="waiting.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 2 -->
+          <!-- Publication 02 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                02
-              </span>
-
+              <span aria-hidden="true">02</span>
               <img
+                loading="lazy"
                 src="figure3.png"
                 alt="Building typology and visual complexity experiment preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1080/09613218.2026.2691250"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  The effect of building typology and visual
-                  complexity on stress levels through amplitude
-                  spectrum analysis
-                </a>
-              </div>
+                >The effect of building typology and visual complexity
+                  on stress levels through amplitude spectrum analysis</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Zordan, M., Maree, P. J. H.,
-                <strong>Lei, Z.</strong>,
-                Xie, T., &amp; Je, S.
-              </div>
+                <strong>Lei, Z.</strong>, Xie, T., &amp; Je, S.
+              </p>
 
-              <div class="pub-venue">
+              <p class="pub-venue">
                 Building Research &amp; Information, 2026
-              </div>
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">JCR Q2 · CAS Q3</span>
-
                 <a
                   href="https://doi.org/10.1080/09613218.2026.2691250"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="The effect of building typology and visual complexity on stress levels through amplitude spectrum analysis.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 3 -->
+          <!-- Publication 03 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                03
-              </span>
-
+              <span aria-hidden="true">03</span>
               <img
+                loading="lazy"
                 src="mainimage-3.png"
                 alt="Visualizing Parametric Density preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1145/3811427.3811517"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Visualizing Parametric Density through
-                  Three-dimensional Amplitude Spectrum Slopes
-                  in Urban Canyons
-                </a>
-              </div>
+                >Visualizing Parametric Density through Three-dimensional
+                  Amplitude Spectrum Slopes in Urban Canyons</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Zordan, M.*, Pei, J.,
                 <strong>Lei, Z.</strong>, Qiu, C.
-              </div>
+              </p>
 
-              <div class="pub-venue">
-                Proceedings of the 2026 International Conference
-                on Advanced Visual Interfaces (AVI ’26), 2026
-              </div>
+              <p class="pub-venue">
+                Proceedings of the 2026 International Conference on
+                Advanced Visual Interfaces (AVI ’26), 2026
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">AVI ’26 Poster</span>
-
                 <a
                   href="https://doi.org/10.1145/3811427.3811517"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="AVI_2026_1f_noise_visualization.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 4 -->
+          <!-- Publication 04 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                04
-              </span>
-
+              <span aria-hidden="true">04</span>
               <img
+                loading="lazy"
                 src="pleaseshare.png"
                 alt="Please Share preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1145/3772318.3791177"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  “Please Share”: Promoting Embodied Forms of
+                >“Please Share”: Promoting Embodied Forms of
                   Interpersonal Stress Sharing Through Real-Time
-                  Neurofeedback
-                </a>
-              </div>
+                  Neurofeedback</a>
+              </h3>
 
-              <div class="pub-authors">
-                Zordan, M.*, Liu, M.,
-                <strong>Lei, Z.</strong>
-              </div>
+              <p class="pub-authors">
+                Zordan, M.*, Liu, M., <strong>Lei, Z.</strong>
+              </p>
 
-              <div class="pub-venue">
-                Proceedings of the 2026 CHI Conference on Human
-                Factors in Computing Systems (CHI ’26), 2026
-              </div>
+              <p class="pub-venue">
+                Proceedings of the 2026 CHI Conference on Human Factors
+                in Computing Systems (CHI ’26), 2026
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">CCF-A</span>
-
                 <a
                   href="https://doi.org/10.1145/3772318.3791177"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="please share.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 5 -->
+          <!-- Publication 05 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                05
-              </span>
-
+              <span aria-hidden="true">05</span>
               <img
+                loading="lazy"
                 src="nonverbal.png"
                 alt="Nonverbal communication preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1016/j.ergon.2025.103847"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Nonverbal Communication between Cars: Influence
-                  of Taillight Expressions on Message Delivery
-                  Effectiveness
-                </a>
-              </div>
+                >Nonverbal Communication between Cars: Influence of
+                  Taillight Expressions on Message Delivery
+                  Effectiveness</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Hou, G., <strong>Lei, Z.*</strong>
-              </div>
+              </p>
 
-              <div class="pub-venue">
+              <p class="pub-venue">
                 International Journal of Industrial Ergonomics, 2025
-              </div>
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">JCR Q1 · CAS Q2</span>
-
                 <a
                   href="https://doi.org/10.1016/j.ergon.2025.103847"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="Nonverbal communication between cars.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 6 -->
+          <!-- Publication 06 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                06
-              </span>
-
+              <span aria-hidden="true">06</span>
               <img
+                loading="lazy"
                 src="hazard.png"
                 alt="Taillight hazard preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="https://doi.org/10.1016/j.trf.2024.07.002"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  The Effect of Taillight Shapes and Vehicle
-                  Distance on Rearward Drivers’ Hazard Perception
-                </a>
-              </div>
+                >The Effect of Taillight Shapes and Vehicle Distance on
+                  Rearward Drivers’ Hazard Perception</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Hou, G., <strong>Lei, Z.*</strong>, Wang, H.*
-              </div>
+              </p>
 
-              <div class="pub-venue">
-                Transportation Research Part F: Traffic Psychology
-                and Behaviour, 2024
-              </div>
+              <p class="pub-venue">
+                Transportation Research Part F:
+                Traffic Psychology and Behaviour, 2024
+              </p>
 
               <div class="pub-actions">
                 <span class="pub-badge">JCR Q1 · CAS Q2</span>
-
                 <a
                   href="https://doi.org/10.1016/j.trf.2024.07.002"
                   target="_blank"
                   rel="noopener noreferrer"
-                >DOI</a>
-
+                >DOI ↗</a>
                 <a
                   href="The effect of taillight shapes and vehicle distance on rearward.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 7 -->
+          <!-- Publication 07 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                07
-              </span>
-
+              <span aria-hidden="true">07</span>
               <img
+                loading="lazy"
                 src="角色流变.png"
                 alt="Evolution of Age-Friendly Design Theory preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="角色视角下的适老化设计理论演进_沈旭媛.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Evolution of Age-Friendly Design Theory
-                  from the Perspective of Role
-                </a>
-              </div>
+                >Evolution of Age-Friendly Design Theory
+                  from the Perspective of Role</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 Shen, X., Hou, G., <strong>Lei, Z.</strong>
-              </div>
+              </p>
 
-              <div class="pub-venue">
+              <p class="pub-venue">
                 Package &amp; Design, 2024(1), 128–129
-              </div>
+              </p>
 
               <div class="pub-actions">
                 <a
                   href="角色视角下的适老化设计理论演进_沈旭媛.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
 
-          <!-- 论文 8 -->
+          <!-- Publication 08 -->
           <article class="pub-item">
             <div class="pub-thumb">
-              <span class="thumb-fallback" aria-hidden="true">
-                08
-              </span>
-
+              <span aria-hidden="true">08</span>
               <img
+                loading="lazy"
                 src="适老化工具.png"
                 alt="Evolution of Design Tools in Age-Friendly Design preview"
-                loading="lazy"
                 onerror="this.hidden=true"
               >
             </div>
 
-            <div>
-              <div class="pub-title">
+            <div class="pub-content">
+              <h3>
                 <a
                   href="适老化设计中设计工具的演进_雷子闲.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
-                  Evolution of Design Tools in Age-Friendly Design
-                </a>
-              </div>
+                >Evolution of Design Tools in Age-Friendly Design</a>
+              </h3>
 
-              <div class="pub-authors">
+              <p class="pub-authors">
                 <strong>Lei, Z.</strong>, Hou, G.*, Shen, X.
-              </div>
+              </p>
 
-              <div class="pub-venue">
+              <p class="pub-venue">
                 Package &amp; Design, 2024(1), 158–159
-              </div>
+              </p>
 
               <div class="pub-actions">
                 <a
                   href="适老化设计中设计工具的演进_雷子闲.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                >PDF</a>
+                >PDF ↗</a>
               </div>
             </div>
           </article>
-
         </div>
       </section>
 
-      <!-- 其他链接 -->
+      <!-- Links -->
       <section
         class="section"
         id="links"
         aria-labelledby="links-title"
       >
         <div class="section-heading">
-          <h2 class="section-title" id="links-title">
-            Elsewhere
-          </h2>
+          <h2 id="links-title">Elsewhere</h2>
         </div>
 
         <div class="links-line">
+          <a href="mailto:lzxlook@gmail.com">Email ↗</a>
           <a
             href="https://scholar.google.com/citations?user=EFdB2msAAAAJ&amp;hl=en"
             target="_blank"
             rel="noopener noreferrer"
-          >Google Scholar</a>
-
+          >Google Scholar ↗</a>
           <a
             href="https://www.linkedin.com/in/zixian-lei-915a721aa/"
             target="_blank"
             rel="noopener noreferrer"
-          >LinkedIn</a>
-
+          >LinkedIn ↗</a>
           <a
             href="https://orcid.org/0009-0003-8208-3291"
             target="_blank"
             rel="noopener noreferrer"
-          >ORCID</a>
-
+          >ORCID ↗</a>
           <a
             href="https://www.fsv-lab.com"
             target="_blank"
             rel="noopener noreferrer"
-          >FSV Lab</a>
+          >FSV Lab ↗</a>
         </div>
       </section>
     </main>
 
-    <!-- 页脚 -->
-    <footer class="footer">
+    <footer>
+      <span>Zixian Lei · Last updated 2026</span>
 
-  <span>Zixian Lei · Last updated 2026</span>
-
-  <div class="busuanzi-stats" aria-label="Site statistics">
-    <span>
-      Visitors today
-      <span id="busuanzi_today_uv" class="busuanzi-num">—</span>
-    </span>
-
-    <span>
-      Total visitors
-      <span id="busuanzi_site_uv" class="busuanzi-num">—</span>
-    </span>
-
-    <span>
-      Views today
-      <span id="busuanzi_today_pv" class="busuanzi-num">—</span>
-    </span>
-
-    <span>
-      Total views
-      <span id="busuanzi_site_pv" class="busuanzi-num">—</span>
-    </span>
-  </div>
-
-</footer>
-
-<script
-  defer
-  src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"
-></script>
+      <div class="visitor-stats" aria-label="Site statistics">
+        <span>
+          Visitors today <b id="busuanzi_today_uv">—</b>
+        </span>
+        <span>
+          Total visitors <b id="busuanzi_site_uv">—</b>
+        </span>
+        <span>
+          Views today <b id="busuanzi_today_pv">—</b>
+        </span>
+        <span>
+          Total views <b id="busuanzi_site_pv">—</b>
+        </span>
+      </div>
     </footer>
   </div>
 
   <script>
-    /* ===== 深浅主题切换 ===== */
+    /**
+     * Original, code-drawn 48 × 48 pixel sprites.
+     * No external sprite assets required.
+     */
+    function buildAnimalSprites() {
+      const kinds = ['cat', 'pig', 'corgi', 'bunny', 'bear'];
 
-    const toggle = document.getElementById("themeToggle");
+      return kinds.map((kind) => {
+        const sprite = document.createElement('canvas');
+        sprite.width = sprite.height = 48;
+        sprite.dataset.animal = kind;
 
-    function syncToggle() {
-      const dark =
-        document.documentElement.dataset.theme === "dark";
+        const c = sprite.getContext('2d');
+        c.imageSmoothingEnabled = false;
 
-      toggle.setAttribute("aria-pressed", String(dark));
+        const rect = (x, y, w, h, color) => {
+          c.fillStyle = color;
+          c.fillRect(x, y, w, h);
+        };
 
-      toggle.setAttribute(
-        "aria-label",
-        dark ? "Use light theme" : "Use dark theme"
-      );
+        const shape = (points, color) => {
+          c.fillStyle = color;
+          c.beginPath();
+          c.moveTo(points[0], points[1]);
+
+          for (let i = 2; i < points.length; i += 2) {
+            c.lineTo(points[i], points[i + 1]);
+          }
+
+          c.closePath();
+          c.fill();
+        };
+
+        const rounded = (x, y, w, h, cut, color) => shape([
+          x + cut, y,
+          x + w - cut, y,
+          x + w - cut, y + cut,
+          x + w, y + cut,
+          x + w, y + h - cut,
+          x + w - cut, y + h - cut,
+          x + w - cut, y + h,
+          x + cut, y + h,
+          x + cut, y + h - cut,
+          x, y + h - cut,
+          x, y + cut,
+          x + cut, y + cut
+        ], color);
+
+        // Ice cube: top face.
+        shape([
+          3,15, 3,12, 6,12, 6,9, 9,9, 9,6,
+          12,6, 12,3, 39,3, 39,6, 42,6, 42,9,
+          45,9, 45,12, 39,12, 39,15
+        ], '#92dce9');
+
+        shape([
+          9,12, 9,9, 12,9, 12,6,
+          36,6, 36,9, 33,9, 33,12
+        ], '#e6fbff');
+
+        rect(15, 4, 21, 2, '#c9f6fc');
+        rect(12, 7, 3, 3, '#fcffff');
+        rect(9, 10, 3, 3, '#fcffff');
+
+        // Ice cube: side face.
+        shape([
+          36,12, 39,12, 39,9, 42,9, 42,6, 45,6,
+          45,33, 42,33, 42,36, 39,36, 39,39, 36,39
+        ], '#83cfdf');
+
+        shape([
+          39,15, 42,15, 42,12, 43,12, 43,30,
+          40,30, 40,33, 37,33, 37,18, 39,18
+        ], '#b7eef7');
+
+        rect(42, 17, 1, 9, '#e9fcff');
+
+        // Ice cube: front face.
+        rounded(3, 12, 36, 33, 3, '#9ddfeb');
+        rounded(6, 15, 30, 27, 3, '#e6faff');
+        rect(9, 15, 24, 2, '#c8eff5');
+        rect(7, 18, 2, 15, '#f6feff');
+        rect(9, 36, 24, 3, '#d4f4f9');
+
+        const outline = '#737f7d';
+        const cream = '#fffaf0';
+        const pink = '#f3b7bb';
+        const eye = '#59635e';
+
+        if (kind === 'cat') {
+          shape([
+            9,25,9,15,12,15,12,12,15,12,15,15,18,15,
+            18,18,27,18,27,15,30,15,30,12,33,12,33,15,36,15,
+            36,30,33,30,33,36,30,36,30,39,15,39,15,36,12,36,
+            12,33,9,33,9,30,6,30,6,27,9,27
+          ], outline);
+
+          shape([
+            12,18,12,15,14,15,14,18,17,18,17,21,28,21,
+            28,18,31,18,31,15,33,15,33,28,31,28,31,34,28,34,
+            28,36,16,36,16,34,13,34,13,31,10,31,10,27,12,27
+          ], '#fffdf5');
+
+          rect(13, 16, 2, 4, '#e9c6c5');
+          rect(30, 16, 2, 4, '#e9c6c5');
+          rect(15, 25, 2, 4, eye);
+          rect(27, 25, 2, 4, eye);
+          rect(14, 30, 4, 2, pink);
+          rect(27, 30, 4, 2, pink);
+          rect(21, 28, 2, 2, '#bc9998');
+          rect(20, 30, 1, 2, eye);
+          rect(23, 30, 1, 2, eye);
+          rect(21, 32, 2, 1, eye);
+          rect(8, 25, 4, 1, outline);
+          rect(7, 29, 5, 1, outline);
+          rect(32, 25, 4, 1, outline);
+          rect(33, 29, 4, 1, outline);
+        }
+
+        if (kind === 'pig') {
+          rounded(9, 14, 8, 10, 2, outline);
+          rounded(28, 14, 8, 10, 2, outline);
+          rect(11, 16, 4, 6, '#e8a9b3');
+          rect(30, 16, 4, 6, '#e8a9b3');
+          rounded(9, 19, 27, 21, 4, outline);
+          rounded(11, 20, 23, 17, 3, '#ffd3d8');
+          rect(14, 22, 17, 2, '#ffe5e7');
+          rect(15, 26, 2, 3, eye);
+          rect(28, 26, 2, 3, eye);
+          rect(12, 30, 4, 3, '#f2a8b2');
+          rect(29, 30, 4, 3, '#f2a8b2');
+          rounded(18, 28, 10, 7, 2, '#f2a4b0');
+          rect(20, 30, 2, 3, '#c97b8b');
+          rect(24, 30, 2, 3, '#c97b8b');
+          rect(22, 36, 3, 1, '#b88287');
+        }
+
+        if (kind === 'corgi') {
+          shape([
+            9,25,9,16,12,16,12,12,15,12,15,15,18,15,18,20,
+            27,20,27,15,30,15,30,12,33,12,33,16,36,16,36,31,
+            33,31,33,36,30,36,30,39,15,39,15,36,12,36,12,33,
+            9,33,9,30,6,30,6,27,9,27
+          ], outline);
+
+          shape([
+            12,18,12,15,14,15,14,18,16,18,16,22,29,22,
+            29,18,31,18,31,15,33,15,33,28,31,28,31,34,28,34,
+            28,36,16,36,16,34,13,34,13,31,10,31,10,27,12,27
+          ], '#dca674');
+
+          rect(12, 18, 3, 5, '#f2c2a6');
+          rect(30, 18, 3, 5, '#f2c2a6');
+
+          shape([
+            20,21,25,21,25,27,28,27,28,30,31,30,31,34,
+            28,34,28,37,16,37,16,34,13,34,13,30,17,30,
+            17,27,20,27
+          ], cream);
+
+          rect(14, 25, 2, 4, eye);
+          rect(28, 25, 2, 4, eye);
+          rect(21, 29, 4, 2, eye);
+          rect(22, 31, 2, 2, eye);
+          rect(20, 33, 2, 1, eye);
+          rect(24, 33, 2, 1, eye);
+          rect(12, 31, 4, 2, '#edb9a8');
+          rect(29, 31, 4, 2, '#edb9a8');
+        }
+
+        if (kind === 'bunny') {
+          rounded(12, 10, 7, 17, 2, outline);
+          rounded(26, 10, 7, 17, 2, outline);
+          rect(14, 12, 3, 13, '#eee0cb');
+          rect(28, 12, 3, 13, '#eee0cb');
+          rect(15, 14, 1, 8, '#dfb5b4');
+          rect(29, 14, 1, 8, '#dfb5b4');
+          rounded(9, 22, 27, 18, 4, outline);
+          rounded(11, 23, 23, 14, 3, '#f5e8d4');
+          rect(14, 23, 17, 2, '#fff7e7');
+          rect(15, 27, 2, 4, eye);
+          rect(28, 27, 2, 4, eye);
+          rect(13, 32, 4, 2, '#e8b8b3');
+          rect(28, 32, 4, 2, '#e8b8b3');
+          rect(21, 30, 3, 2, '#bc9390');
+          rect(20, 32, 1, 2, eye);
+          rect(24, 32, 1, 2, eye);
+          rect(21, 34, 3, 1, eye);
+        }
+
+        if (kind === 'bear') {
+          rounded(8, 14, 10, 10, 3, outline);
+          rounded(27, 14, 10, 10, 3, outline);
+          rounded(10, 16, 6, 6, 2, '#c09b77');
+          rounded(29, 16, 6, 6, 2, '#c09b77');
+          rect(12, 18, 2, 3, '#e6c6a6');
+          rect(31, 18, 2, 3, '#e6c6a6');
+          rounded(9, 20, 27, 20, 4, outline);
+          rounded(11, 21, 23, 16, 3, '#b99573');
+          rect(14, 22, 17, 2, '#c5a584');
+          rect(15, 27, 2, 3, '#505955');
+          rect(28, 27, 2, 3, '#505955');
+          rounded(18, 29, 10, 8, 2, '#fff3dc');
+          rect(21, 29, 4, 3, '#65716b');
+          rect(22, 32, 2, 2, '#65716b');
+          rect(20, 34, 2, 1, '#65716b');
+          rect(24, 34, 2, 1, '#65716b');
+          rect(12, 31, 4, 2, '#d8a5a0');
+          rect(29, 31, 4, 2, '#d8a5a0');
+        }
+
+        // Front glass rim and highlights.
+        rect(6, 15, 3, 9, '#c3f2f8');
+        rect(6, 33, 3, 6, '#c3f2f8');
+        rect(9, 39, 24, 3, '#c1f0f7');
+        rect(33, 36, 3, 3, '#b5eaf3');
+        rect(36, 18, 2, 15, '#c1f1f9');
+        rect(7, 17, 2, 5, '#ffffff');
+        rect(9, 15, 6, 2, '#ffffff');
+        rect(10, 40, 9, 1, '#f4feff');
+        rect(31, 17, 3, 2, 'rgba(255,255,255,.76)');
+        rect(29, 19, 2, 3, 'rgba(255,255,255,.64)');
+        rect(39, 9, 3, 3, '#f7ffff');
+        rect(40, 12, 2, 5, '#ddfaff');
+
+        return sprite;
+      });
     }
 
-    syncToggle();
+    (() => {
+      'use strict';
 
-    toggle.addEventListener("click", () => {
-      const theme =
-        document.documentElement.dataset.theme === "dark"
-          ? "light"
-          : "dark";
+      const root = document.documentElement;
+      const canopy = document.getElementById('ice-friends');
+      const spriteUrls = buildAnimalSprites().map(
+        canvas => canvas.toDataURL()
+      );
+      const animals = ['cat', 'pig', 'corgi', 'bunny', 'bear'];
 
-      document.documentElement.dataset.theme = theme;
+      document.getElementById('brand-friend').src = spriteUrls[0];
 
-      try {
-        localStorage.setItem("zixian-theme", theme);
-      } catch (_) {}
+      const pauseButton = document.getElementById('pause-animation');
+      const speedInput = document.getElementById('fall-speed');
+      const preference = matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      );
 
-      syncToggle();
-    });
+      let paused = preference.matches;
+      let explicitChoice = false;
+      let speed = Number(speedInput.value);
+      let row = [];
+      let queue = [];
+      let active = null;
+      let activeDrop = null;
+      let timer = null;
+      let waitRemaining = 1100;
+      let waitStarted = 0;
+      let lastIndex = -1;
+      let resizeTimer = null;
 
-    /* ===== 根据滚动位置更新导航 ===== */
+      function shuffledIndices() {
+        const indices = row.map((_, index) => index);
 
-    const navLinks = [
-      ...document.querySelectorAll(".nav-links a")
-    ];
+        for (let i = indices.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
 
-    const sections = [
-      ...document.querySelectorAll("main > section")
-    ];
+        if (indices.length > 1 && indices[0] === lastIndex) {
+          [indices[0], indices[1]] = [indices[1], indices[0]];
+        }
 
-    function updateNav() {
-      let current = sections[0];
+        return indices;
+      }
 
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= 140) {
-          current = section;
+      function clearWait(remember = false) {
+        if (timer !== null) {
+          clearTimeout(timer);
+          timer = null;
+
+          if (remember) {
+            waitRemaining = Math.max(
+              0,
+              waitRemaining - (performance.now() - waitStarted)
+            );
+          }
         }
       }
+
+      function schedule(delay) {
+        clearWait();
+        waitRemaining = delay;
+
+        if (paused || document.hidden) return;
+
+        waitStarted = performance.now();
+
+        timer = setTimeout(() => {
+          timer = null;
+          waitRemaining = 0;
+          dropOne();
+        }, delay);
+      }
+
+      function cancelDrop() {
+        const previous = active;
+        active = null;
+
+        if (previous) previous.cancel();
+        if (activeDrop) activeDrop.remove();
+
+        activeDrop = null;
+      }
+
+      function buildRow() {
+        clearWait();
+        cancelDrop();
+        canopy.replaceChildren();
+
+        const size = parseFloat(
+          getComputedStyle(root).getPropertyValue('--friend-size')
+        );
+
+        const count = Math.max(
+          8,
+          Math.floor(innerWidth / (size + 3))
+        );
+
+        const fragment = document.createDocumentFragment();
+        row = [];
+
+        for (let index = 0; index < count; index++) {
+          const item = document.createElement('div');
+          item.className = 'tiny-friend';
+
+          item.style.setProperty(
+            '--anchor',
+            ((index + .5) / count * 100) + '%'
+          );
+
+          item.dataset.animal = animals[index % 5];
+
+          const hanger = document.createElement('span');
+          hanger.className = 'hanger';
+
+          const image = document.createElement('img');
+          image.src = spriteUrls[index % 5];
+          image.alt = '';
+          image.draggable = false;
+
+          item.append(hanger, image);
+
+          image.addEventListener('animationend', () => {
+            item.classList.remove('is-replenishing');
+          });
+
+          fragment.append(item);
+          row.push(item);
+        }
+
+        canopy.append(fragment);
+        queue = shuffledIndices();
+        schedule(1100);
+      }
+
+      function dropOne() {
+        if (
+          active ||
+          paused ||
+          document.hidden ||
+          !row.length
+        ) return;
+
+        if (!queue.length) queue = shuffledIndices();
+
+        const index = queue.shift();
+        lastIndex = index;
+
+        const source = row[index];
+        const drop = document.createElement('div');
+        drop.className = 'falling-friend';
+
+        drop.style.setProperty(
+          '--anchor',
+          source.style.getPropertyValue('--anchor')
+        );
+
+        const image = source.querySelector('img').cloneNode();
+        drop.append(image);
+        canopy.append(drop);
+        activeDrop = drop;
+
+        source.classList.remove('is-replenishing');
+        void source.offsetWidth;
+        source.classList.add('is-replenishing');
+
+        const distance = Math.max(
+          100,
+          innerHeight - drop.getBoundingClientRect().height - 5
+        );
+
+        const animation = drop.animate([
+          {
+            offset: 0,
+            transform: 'translate3d(-50%,0,0) scale(1)',
+            opacity: 1
+          },
+          {
+            offset: .12,
+            transform: 'translate3d(-50%,3px,0) scale(.95,1.08)',
+            opacity: 1
+          },
+          {
+            offset: .19,
+            transform: 'translate3d(-50%,7px,0) scale(1)',
+            easing: 'cubic-bezier(.34,.12,.55,1)'
+          },
+          {
+            offset: .91,
+            transform:
+              'translate3d(-50%,' + distance + 'px,0) scale(1)',
+            opacity: 1
+          },
+          {
+            offset: 1,
+            transform:
+              'translate3d(-50%,' + (distance + 8) +
+              'px,0) scale(.9)',
+            opacity: 0
+          }
+        ], {
+          duration: 4800,
+          easing: 'linear',
+          fill: 'forwards'
+        });
+
+        animation.playbackRate = speed;
+        active = animation;
+
+        animation.finished.then(() => {
+          if (active !== animation) return;
+
+          drop.remove();
+          activeDrop = null;
+          active = null;
+          schedule(650 / speed);
+        }).catch(() => {
+          // Replay and resizing intentionally cancel the old drop.
+        });
+      }
+
+      function syncPlayback() {
+        const suspended = paused || document.hidden;
+
+        root.dataset.motion = suspended ? 'paused' : 'running';
+        pauseButton.textContent = paused ? '▶ Resume' : 'Ⅱ Pause';
+
+        pauseButton.setAttribute('aria-pressed', String(paused));
+        pauseButton.setAttribute(
+          'aria-label',
+          paused ? 'Resume animation' : 'Pause animation'
+        );
+
+        if (suspended) {
+          clearWait(true);
+          if (active) active.pause();
+        } else if (active) {
+          active.play();
+        } else {
+          schedule(waitRemaining);
+        }
+      }
+
+      pauseButton.addEventListener('click', () => {
+        explicitChoice = true;
+        root.dataset.userMotion = 'true';
+        paused = !paused;
+        syncPlayback();
+      });
+
+      document.getElementById('replay-animation')
+        .addEventListener('click', () => {
+          clearWait();
+          cancelDrop();
+          queue = shuffledIndices();
+          schedule(650);
+        });
+
+      speedInput.addEventListener('input', () => {
+        speed = Number(speedInput.value);
+
+        speedInput.setAttribute(
+          'aria-valuetext',
+          speed <= .9 ? 'Slow' : 'A little faster'
+        );
+
+        if (active) active.updatePlaybackRate(speed);
+      });
+
+      document.addEventListener(
+        'visibilitychange',
+        syncPlayback
+      );
+
+      preference.addEventListener('change', event => {
+        if (!explicitChoice) {
+          paused = event.matches;
+          syncPlayback();
+        }
+      });
+
+      addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildRow, 120);
+      });
+
+      buildRow();
+      syncPlayback();
+    })();
+  </script>
+
+  <!-- Visitor counters load only on a hosted HTTP(S) website. -->
+  <script>
+    (() => {
+      const isLocal =
+        !['http:', 'https:'].includes(location.protocol) ||
+        ['localhost', '127.0.0.1', '[::1]'].includes(
+          location.hostname
+        );
 
       if (
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 3
-      ) {
-        current = sections[sections.length - 1];
-      }
+        isLocal ||
+        document.getElementById('visitor-counter-script')
+      ) return;
 
-      for (const link of navLinks) {
-        const active = link.hash === "#" + current.id;
-
-        link.classList.toggle("active", active);
-
-        if (active) {
-          link.setAttribute("aria-current", "location");
-        } else {
-          link.removeAttribute("aria-current");
-        }
-      }
-    }
-
-    let ticking = false;
-
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            updateNav();
-            ticking = false;
-          });
-        }
-
-        ticking = true;
-      },
-      { passive: true }
-    );
-
-    updateNav();
-
-    /* ===== 不蒜子统计：仅在网站部署后加载 ===== */
-
-    const isLocal =
-      location.protocol === "file:" ||
-      ["localhost", "127.0.0.1", "[::1]"].includes(
-        location.hostname
-      );
-
-    if (!isLocal) {
-      const counter = document.createElement("script");
-
-      counter.async = true;
+      const counter = document.createElement('script');
+      counter.id = 'visitor-counter-script';
       counter.src =
-        "https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+        'https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js';
+      counter.async = true;
 
       document.body.append(counter);
-    }
+    })();
   </script>
 </body>
 </html>
