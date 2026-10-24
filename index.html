@@ -7,6 +7,8 @@
   <meta name="description" content="Zixian Lei — research in ergonomics, human–computer interaction, psychology, and industrial design.">
   <title>Zixian Lei · Research & Design</title>
 
+  
+  
   <style>
     :root {
       --ink: #21425a;
@@ -867,7 +869,27 @@
         break-inside: avoid;
       }
     }
-  </style>
+
+
+
+    
+  /* 配图宽度随栏目变化，高度保持原图比例 */
+.pub-thumb {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+}
+
+.pub-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 图片加载失败时保留编号占位 */
+.pub-thumb:has(> img[hidden]) {
+  min-height: 96px;
+}
 </head>
 
 <body>
@@ -1114,7 +1136,7 @@
               <span aria-hidden="true">02</span>
               <img
                 loading="lazy"
-                src="figure3.png"
+                src="1Fnoise.jpg"
                 alt="Building typology and visual complexity experiment preview"
                 onerror="this.hidden=true"
               >
